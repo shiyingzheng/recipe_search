@@ -2,19 +2,22 @@
 
 ## Setup
 
-1. Install python3 and postgres (psql)
+1. Install python3
 
-2. Install Heroku CLI (Heroku toolbelt)
+2. Install postgres (psql)
+        sudo apt-get install postgresql-9.4
+
+3. Install Heroku CLI (Heroku toolbelt)
         wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
-3. Install required packages
+4. Install required packages
         pip3 install requirements.txt
 
 [add other steps that I might have forgotten here]
 
-4. Now that you have postgres, create your local database, user, password. Make sure your user has the correct permissions to the new database.
+5. Now that you have postgres, create your local database, user, password. Make sure your user has the correct permissions to the new database.
 
-5. You will then need to make your own .env file according to the .env.sample.
+6. You will then need to make your own .env file according to the .env.sample.
 The .env file stores environment variables necessary for the app to run locally, such as the name of the database.
 On Heroku you can set the env vars at the app's settings page.
 
