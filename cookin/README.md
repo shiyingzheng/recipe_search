@@ -54,6 +54,10 @@ You can try both of the following for debugging when `heroku local` fails to boo
         python3 manage.py runserver
         web: gunicorn cookin.wsgi
 
+To open and search the logs of the deployed app:
+
+        heroku addons:open papertrail
+
 
 ### Style:
 
@@ -75,7 +79,7 @@ Start a feature branch and do enough testing. When you're done, submit a pull re
 
 ## Deploying
 
-Let me talk about this later...
+Just use Heroku's deploy page and click the Github tab.
 
 To open the app deployed on Heroku:
 
