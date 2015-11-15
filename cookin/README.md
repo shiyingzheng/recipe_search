@@ -2,22 +2,24 @@
 
 ## Setup
 
-1. Install python3
+- Install python3
 
-2. Install postgres (psql)
-        sudo apt-get install postgresql-9.4
+- Install postgres (psql) and related packages
+        >sudo apt-get install postgresql
+        >sudo apt-get install python-psycopg2
+        >sudo apt-get install libpq-dev
 
-3. Install Heroku CLI (Heroku toolbelt)
-        wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+- Install Heroku CLI (Heroku toolbelt)
+        >wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
 
-4. Install required packages
-        pip3 install requirements.txt
+- Install required packages
+        >pip3 install requirements.txt
 
 [add other steps that I might have forgotten here]
 
-5. Now that you have postgres, create your local database, user, password. Make sure your user has the correct permissions to the new database.
+- Now that you have postgres, create your local database, user, password. Make sure your user has the correct permissions to the new database.
 
-6. You will then need to make your own .env file according to the .env.sample.
+- You will then need to make your own .env file according to the .env.sample.
 The .env file stores environment variables necessary for the app to run locally, such as the name of the database.
 On Heroku you can set the env vars at the app's settings page.
 
@@ -26,11 +28,11 @@ On Heroku you can set the env vars at the app's settings page.
 
 To run the app locally:
 
-1. collects static files
-        python3 manage.py collectstatic
+- collects static files
+        >python3 manage.py collectstatic
 
-2. run app
-        heroku local
+- run app
+        >heroku local
 
 
 ### Style:
@@ -56,13 +58,13 @@ Start a feature branch and do enough testing. When you're done, submit a pull re
 Let me talk about this later...
 
 To open the app deployed on Heroku:
-        heroku open
+        >heroku open
 
 To open and search the logs of the deployed app:
-    heroku addons:open papertrail
+        >heroku addons:open papertrail
 
 To experiment in the deployed app's environment in a python shell:
-    heroku run python3 manage.py shell
+        >heroku run python3 manage.py shell
 
 
 ## Notes
