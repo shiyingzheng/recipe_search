@@ -93,6 +93,11 @@ To experiment in the deployed app's environment in a python shell:
 
         heroku run python3 manage.py shell
 
+If you ever need to reset the database...(hopefully not)
+
+        heroku pg:reset postgres
+        heroku run python manage.py syncdb
+
 
 ## Notes
 
