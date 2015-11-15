@@ -16,9 +16,7 @@
 
 - Install required packages
 
-        pip3 install requirements.txt
-
-[add other steps that I might have forgotten here]
+        pip3 install -r requirements.txt
 
 - Now that you have postgres, create your local database, user, password. Make sure your user has the correct permissions to the new database.
 
@@ -29,7 +27,16 @@ On Heroku you can set the env vars at the app's settings page.
 
 ## Developing
 
-To run the app locally:
+To make migrations, do
+
+    python manage.py makemigrations app
+    python manage.py migrate
+
+You may run the interactive shell like this
+
+    python3 manage.py shell
+
+To run the app locally using heroku:
 
 - collects static files
 
@@ -38,6 +45,14 @@ To run the app locally:
 - run app
 
         heroku local
+
+
+## Debugging
+
+You can try both of the following for debugging when `heroku local` fails to boot worker
+
+        python3 manage.py runserver
+        web: gunicorn cookin.wsgi
 
 
 ### Style:

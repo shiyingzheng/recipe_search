@@ -1,4 +1,3 @@
-from django.db import models
+from .recipe_model import Recipe
 
-# Please import any newly added model as follows:
-# from model_file import Model_name
+# Please import any newly added model here

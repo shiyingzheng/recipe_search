@@ -1,4 +1,4 @@
 from django.shortcuts import render
 
-# Please import any newly added views as follows:
-# from view_file import View_name
+from .recipe_detail import recipe_detail
+# Please import any newly added views here
