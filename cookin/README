@@ -1,24 +1,74 @@
-Install python3 and postgres
-Install Heroku CLI
-pip3 install requirements.txt
+# Cookin - A Powerful Recipe Search Tool
+
+## Setup
+
+1. Install python3 and postgres (psql)
+
+2. Install Heroku CLI (Heroku toolbelt)
+        wget -O- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+
+3. Install required packages
+        pip3 install requirements.txt
+
 [add other steps that I might have forgotten here]
 
-You will need to make your own .env file according to the .env.sample.
-The .env file stores environment variables necessary for the app to run locally,
-such as the name of the database.
+4. Now that you have postgres, create your local database, user, password. Make sure your user has the correct permissions to the new database.
+
+5. You will then need to make your own .env file according to the .env.sample.
+The .env file stores environment variables necessary for the app to run locally, such as the name of the database.
 On Heroku you can set the env vars at the app's settings page.
 
-Useful commands:
-heroku local web - lets you run local server
-heroku open - lets you open the deployed app
-heroku addons:open papertrail - lets you open and search the logs
+
+## Developing
+
+To run the app locally:
+
+1. collects static files
+        python3 manage.py collectstatic
+
+2. run app
+        heroku local
+
+
+### Style:
+
+Set up your editor to use:
+
+- 4-space tabs.
+- No trailing whitespace.
+- One trailing newline at the end of the file.
+
+Keep lines < 80 characters.
+
+
+## Version Control
+
+Please do not commit directly to the master branch, unless it's absolutely necessary and ok to do so.
+
+Start a feature branch and do enough testing. When you're done, submit a pull request on github.
+
+
+## Deploying
+
+Let me talk about this later...
+
+To open the app deployed on Heroku:
+        heroku open
+
+To open and search the logs of the deployed app:
+    heroku addons:open papertrail
+
+To experiment in the deployed app's environment in a python shell:
+    heroku run python3 manage.py shell
+
+
+## Notes
 
 Since we're on a free account the deployed app can only run 18 hours per day.
-If it is idling Heroku will shut down the only Dyno (the worker process) that
-we've got.
+
+If it is idling Heroku will shut down the only Dyno (the worker process) that we've got.
+
 When you visit the page Dyno will restart.
+
 I think for our purpose 18 hours per day and one Dyno is enough, but we'll see.
 
-Please do not commit directly to the master branch.
-Start a feature branch and do enough testing.
-When you're done, submit a pull request on github.
