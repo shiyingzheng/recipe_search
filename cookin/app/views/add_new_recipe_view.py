@@ -6,7 +6,7 @@ from app.views import recipe_detail
 
 def add_new_recipe(request):
     if request.method == "POST":
-        form = AddRecipeForm(request.POST)
+        form = AddRecipeForm(request.POST, request.FILES)
         if form.is_valid():
             post = form.save()
             return redirect(recipe_detail, recipe_id=post.pk)

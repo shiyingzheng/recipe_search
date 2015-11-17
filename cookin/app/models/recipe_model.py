@@ -1,9 +1,19 @@
 from django.db import models
 from datetime import datetime
+import uuid
+import os
+
+
+def recipe_image_name(instance, filename):
+    extension = os.path.splitext(filename)[1]
+    return "recipe_images/%s%s" % (uuid.uuid4(), extension)
+
 
 class Recipe(models.Model):
     recipe_title = models.CharField(max_length=200)
     recipe_text = models.TextField(default="Coming soon!")
+    recipe_image = models.ImageField(upload_to=recipe_image_name,
+                                     blank=True)
     publish_date = models.DateTimeField(default=datetime.utcnow)
 
     def __str__(self):

@@ -1,7 +1,13 @@
 {% block content %}
     <h1>Add new recipe!</h1>
-    <form method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
+    <form enctype="multipart/form-data" method="post" action="">
+        {% csrf_token %}
+        <p>Recipe Title</p>
+        {{ form.recipe_title }}<br>
+        <p>Recipe Text</p>
+        {{ form.recipe_text }}<br>
+        <p>Image Upload</p>
+        {{ form.recipe_image }}<br>
+        <button type="submit">Submit</button>
     </form>
 {% endblock %}
