@@ -3,3 +3,5 @@ django-postgrespool
 gunicorn
 psycopg2
 whitenoise
+boto
+django-storages-redux

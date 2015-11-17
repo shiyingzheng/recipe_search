@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app',
+    'storages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -122,3 +123,14 @@ STATICFILES_DIRS = (
 """
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+
+# Media files - user upload
+# http://djangotricks.blogspot.com/2013/12/how-to-store-your-media-files-in-amazon.html
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_S3_SECURE_URLS = False
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_S3_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')

@@ -69,6 +69,8 @@ Set up your editor to use:
 
 Keep lines < 80 characters.
 
+Look at the existing file names and field names and follow naming conventions for clarity.
+
 
 ## Version Control
 
