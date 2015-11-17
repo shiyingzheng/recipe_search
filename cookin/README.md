@@ -83,6 +83,10 @@ Start a feature branch and do enough testing. When you're done, submit a pull re
 
 Just use Heroku's deploy page and click the Github tab.
 
+Run the following if you have made migrations, otherwise your tables won't exist:
+
+        heroku run python manage.py syncdb
+
 To open the app deployed on Heroku:
 
         heroku open
