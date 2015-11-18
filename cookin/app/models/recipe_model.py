@@ -3,6 +3,8 @@ from datetime import datetime
 import uuid
 import os
 
+from .tag_model import Tag
+
 
 def recipe_image_name(instance, filename):
     extension = os.path.splitext(filename)[1]
@@ -15,6 +17,7 @@ class Recipe(models.Model):
     recipe_image = models.ImageField(upload_to=recipe_image_name,
                                      blank=True)
     publish_date = models.DateTimeField(default=datetime.utcnow)
+    recipe_tags = models.ManyToManyField(Tag)
 
     def __str__(self):
         return '%s: %s' % (self.recipe_title, self.recipe_text)
