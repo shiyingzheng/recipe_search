@@ -21,4 +21,3 @@ class Recipe(models.Model):
 
     class Meta:
         app_label = 'app'
-
