@@ -29,7 +29,7 @@ On Heroku you can set the env vars at the app's settings page.
 
 To make migrations, do
 
-    python manage.py makemigrations app
+    python manage.py makemigrations
     python manage.py migrate
 
 You may run the interactive shell like this
