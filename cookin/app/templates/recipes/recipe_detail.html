@@ -3,3 +3,7 @@
     <img src="{{ MEDIA_URL }}{{recipe.recipe_image}}" width="50%" alt=""/>
 {% endif %}
 <p>{{recipe.recipe_text}}</p>
+<h4>Tags</h4>
+{% for tag in recipe.recipe_tags.all %}
+    <li>{{ tag }}</li>
+{% endfor %}
