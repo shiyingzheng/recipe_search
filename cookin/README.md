@@ -82,6 +82,10 @@ Use the following command to make a new branch:
 
         git checkout -b [new-branch-name]
 
+To see the differences between the current branch you are on and origin/master, do:
+
+        git diff origin/master
+
 When you're done committing all your changes, push the changes to your branch remotely:
 
         git push origin [branch-name]

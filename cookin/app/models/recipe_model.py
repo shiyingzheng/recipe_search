@@ -17,7 +17,7 @@ class Recipe(models.Model):
     publish_date = models.DateTimeField(default=datetime.utcnow)
 
     def __str__(self):
-        return '%s %s' % (self.recipe_title, self.recipe_text)
+        return '%s: %s' % (self.recipe_title, self.recipe_text)
 
     class Meta:
         app_label = 'app'
