@@ -78,6 +78,16 @@ Please do not commit directly to the master branch, unless it's absolutely neces
 
 Start a feature branch and do enough testing. When you're done, submit a pull request on github.
 
+Use the following command to make a new branch:
+
+        git checkout -b [new-branch-name]
+
+When you're done committing all your changes, push the changes to your branch remotely:
+
+        git push origin [branch-name]
+
+Then you can go to github and submit a merge request by pressing the button
+
 
 ## Deploying
 
