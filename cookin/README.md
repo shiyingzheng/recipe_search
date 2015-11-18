@@ -86,11 +86,24 @@ To see the differences between the current branch you are on and origin/master, 
 
         git diff origin/master
 
+To merge changes in master to your current branch, do:
+
+        git pull
+        git merge master
+
 When you're done committing all your changes, push the changes to your branch remotely:
 
         git push origin [branch-name]
 
 Then you can go to github and submit a merge request by pressing the button
+
+To view difference between two branches, do:
+
+        git diff [branch1] [branch2]
+
+For example, you can do:
+
+        git diff origin/master origin/[my-branch]
 
 
 ## Deploying
