@@ -4,6 +4,8 @@ import uuid
 import os
 from taggit.managers import TaggableManager
 
+from .dietary_restriction_model import DietaryRestriction
+
 
 def recipe_image_name(instance, filename):
     extension = os.path.splitext(filename)[1]
@@ -16,6 +18,7 @@ class Recipe(models.Model):
     recipe_image = models.ImageField(upload_to=recipe_image_name,
                                      blank=True)
     publish_date = models.DateTimeField(default=datetime.utcnow)
+    dietary_restr = models.ManyToManyField(DietaryRestriction)
 
     recipe_tags = TaggableManager()
 

@@ -10,4 +10,5 @@ class AddRecipeForm(ModelForm):
         model = Recipe
         fields = ['recipe_title',
                   'recipe_text',
-                  "recipe_image"]
+                  "recipe_image",
+                  "dietary_restr"]
