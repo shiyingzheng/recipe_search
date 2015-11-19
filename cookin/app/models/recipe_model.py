@@ -4,6 +4,7 @@ import uuid
 import os
 
 from .tag_model import Tag
+from .ingredient_model import Ingredient
 
 
 def recipe_image_name(instance, filename):
@@ -18,6 +19,8 @@ class Recipe(models.Model):
                                      blank=True)
     publish_date = models.DateTimeField(default=datetime.utcnow)
     recipe_tags = models.ManyToManyField(Tag)
+    recipe_ingredients = models.ManyToManyField(Ingredient,
+            through='Ingredient_In_Recipe')
 
     def __str__(self):
         return '%s: %s' % (self.recipe_title, self.recipe_text)
