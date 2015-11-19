@@ -6,3 +6,4 @@ whitenoise
 boto
 django-storages-redux
 Pillow
+django-taggit
