@@ -18,7 +18,6 @@ class Recipe(models.Model):
     publish_date = models.DateTimeField(default=datetime.utcnow)
 
     recipe_tags = TaggableManager()
-    #recipe_tags = models.ManyToManyField(Tag)
 
     def __str__(self):
         return '%s: %s' % (self.recipe_title, self.recipe_text)
