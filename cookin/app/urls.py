@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^recipes/(?P<recipe_id>[0-9]+)/?$', views.recipe_detail, name='recipe_detail'),
     url(r'^recipes/new/?$', views.add_new_recipe, name='add_new_recipe'),
     url(r'^register/?$', views.register, name='register'),
+    url(r'^login/?$', views.user_login, name='login'),
 ]
