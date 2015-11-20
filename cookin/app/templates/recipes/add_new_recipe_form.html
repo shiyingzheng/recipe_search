@@ -1,5 +1,8 @@
 {% block content %}
     <h1>Add new recipe!</h1>
+    {% if not form.valid %}
+        <p>Please enter valid information!</p>
+    {% endif %}
     <form enctype="multipart/form-data" method="post" action="">
         {% csrf_token %}
         <p>Recipe Title</p>
@@ -8,7 +11,7 @@
         {{ form.recipe_text }}<br>
         <p>Image Upload</p>
         {{ form.recipe_image }}<br>
-        <p>Dietary Restrictions</p>
+        <p>Dietary Restrictions Satisfied</p>
         {{ form.dietary_restr }}
         <p>Tags (space separated)</p>
         {{ form.recipe_tags }}<br>

@@ -6,7 +6,7 @@ class DietaryRestriction(models.Model):
     restr_description = models.CharField(max_length=1000)
 
     def __str__(self):
-        return '%s: %s' % (self.restr_name, self.restr_description)
+        return '%s' % self.restr_name
 
     class Meta:
         app_label = 'app'
