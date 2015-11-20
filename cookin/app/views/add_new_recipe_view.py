@@ -28,4 +28,4 @@ def add_new_recipe(request):
 
     return render(request,
                   'recipes/add_new_recipe_form.html',
-                  {'form': form, 'valid': valid}))
+                  {'form': form, 'valid': valid})
