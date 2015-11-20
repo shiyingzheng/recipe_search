@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('taggit', '0002_auto_20150616_2121'),
-        ('app', '0009_auto_20151119_1012'),
+        ('app', '0010_auto_20151119_1148'),
     ]
 
     operations = [

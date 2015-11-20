@@ -8,7 +8,7 @@ import app.models.ingredient_model
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0009_merge'),
+        ('app', '0009_auto_20151119_1012'),
     ]
 
     operations = [
