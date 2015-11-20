@@ -1,4 +1,4 @@
 from .recipe_model import Recipe
-from .userProfile_model import UserProfile
+from .user_profile_model import UserProfile
 
 # Please import any newly added model here
