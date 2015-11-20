@@ -3,6 +3,12 @@
 {% else %}
 <h1>Welcome to CookIn!</h1>
 {% endif %}
-<a href="/app/register/">Register Here</a>
-<br />
-<a href="/app/login/">Login</a>
+
+{% if user.is_authenticated %}
+<a href="/app/recipes/new">Add new Recipe</a><br />
+<a href="/app/logout/">Logout</a><br />
+{% else %}
+<a href="/app/register/">Register Here</a><br />
+<a href="/app/login/">Login</a><br />
+{% endif %}
+
