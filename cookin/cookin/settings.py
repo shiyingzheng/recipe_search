@@ -137,3 +137,7 @@ AWS_S3_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('S3_BUCKET_NAME')
 
 MEDIA_URL = "https://s3.amazonaws.com/%s/" % AWS_STORAGE_BUCKET_NAME
+
+
+# Taggit case insensitive tags
+TAGGIT_CASE_INSENSITIVE = True
