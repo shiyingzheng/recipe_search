@@ -2,6 +2,8 @@ from django.db import models
 from datetime import datetime
 import uuid
 import os
+
+from .ingredient_model import Ingredient
 from taggit.managers import TaggableManager
 from taggit.models import TaggedItemBase
 
@@ -29,6 +31,8 @@ class Recipe(models.Model):
     recipe_image = models.ImageField(upload_to=recipe_image_name,
                                      blank=True)
     publish_date = models.DateTimeField(default=datetime.utcnow)
+    recipe_ingredients = models.ManyToManyField(Ingredient,
+            through='Ingredient_In_Recipe')
 
     recipe_tags = TaggableManager(through=TaggedRecipe,
                                   related_name="recipe_tags")
