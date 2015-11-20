@@ -14,8 +14,8 @@ class Ingredient(models.Model):
     ingredient_description = models.TextField(default="Coming soon!")
     ingredient_image = models.ImageField(upload_to=ingredient_image_name,
                                      blank=True)
-    ingredient_price_per_unit = models.IntegerField()
-    ingredient_unit = models.CharField(max_length=32)
+    ingredient_price_per_unit = models.IntegerField(null=True)
+    ingredient_unit = models.CharField(max_length=32, null=True)
 
     def __str__(self):
         return self.ingredient_name
