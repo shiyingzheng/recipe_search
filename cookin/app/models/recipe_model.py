@@ -2,13 +2,9 @@ from django.db import models
 from datetime import datetime
 import uuid
 import os
-<<<<<<< HEAD
 
-from .tag_model import Tag
 from .ingredient_model import Ingredient
-=======
 from taggit.managers import TaggableManager
->>>>>>> c16bc6f72f5be8ce99bc5b250252111121c1ac54
 
 
 def recipe_image_name(instance, filename):
