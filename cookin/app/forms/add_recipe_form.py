@@ -1,10 +1,9 @@
-from django.forms import ModelForm
+from django.forms import ModelForm, CharField
 from app.models import Recipe
-from taggit.forms import *
 
 
 class AddRecipeForm(ModelForm):
-    recipe_tags = TagField()
+    recipe_tags = CharField(required = False)
 
     class Meta:
         model = Recipe
