@@ -1,23 +1,48 @@
 {% block content %}
     <h1>{{ recipe.recipe_title }}</h1>
+
     {% if recipe.recipe_image %}
         <img src="{{ MEDIA_URL }}{{recipe.recipe_image}}" width="50%" alt=""/>
     {% endif %}
+
     <p>{{recipe.recipe_text}}</p>
+
     {% if recipe.ingredient_in_recipe_set.all %}
-    <h3>Ingredients</h3>
-    <ul>
-    {% for ingredient in recipe.ingredient_in_recipe_set.all %}
-        <li>{{ ingredient.ingredient }} - {{ ingredient.num_units }} units</li>
-    {% endfor %}
+        <h3>Ingredients</h3>
+        <ul>
+        {% for ingredient in recipe.ingredient_in_recipe_set.all %}
+            <li>
+                {{ ingredient.ingredient }} - {{ ingredient.num_units }} units
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    {% if recipe.tools.all %}
+        <h3>Tools</h3>
+        <ul>
+        {% for tool in recipe.tools.all %}
+            <li>{{ tool }}</li>
+        {% endfor %}
     </ul>
     {% endif %}
+
+    {% if recipe.dietary_restrictions.all %}
+        <h4>Satisfied Dietary Restrictions</h4>
+        <ul>
+        {% for restriction in recipe.dietary_restrictions.all %}
+            <li>{{ restriction }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     {% if recipe.recipe_tags.all %}
-    <h4>Tags</h4>
-    <ul>
-    {% for tag in recipe.recipe_tags.all %}
-        <li>{{ tag }}</li>
-    {% endfor %}
+        <h4>Tags</h4>
+        <ul>
+        {% for tag in recipe.recipe_tags.all %}
+            <li>{{ tag }}</li>
+        {% endfor %}
     </ul>
     {% endif %}
+
 {% endblock %}
