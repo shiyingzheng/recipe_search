@@ -2,8 +2,9 @@ from django.shortcuts import redirect, render
 from app.models import Recipe
 from app.forms import AddRecipeForm
 from app.views import recipe_detail
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def add_new_recipe(request):
     valid = True
 
