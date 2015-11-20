@@ -3,6 +3,19 @@ from datetime import datetime
 import uuid
 import os
 from taggit.managers import TaggableManager
+from taggit.models import TaggedItemBase
+
+
+class TaggedDietaryRestriction(TaggedItemBase):
+    content_object = models.ForeignKey('Recipe')
+
+
+class TaggedRecipe(TaggedItemBase):
+    content_object = models.ForeignKey('Recipe')
+
+
+class TaggedTool(TaggedItemBase):
+    content_object = models.ForeignKey('Recipe')
 
 
 def recipe_image_name(instance, filename):
@@ -17,7 +30,12 @@ class Recipe(models.Model):
                                      blank=True)
     publish_date = models.DateTimeField(default=datetime.utcnow)
 
-    recipe_tags = TaggableManager()
+    recipe_tags = TaggableManager(through=TaggedRecipe,
+                                  related_name="recipe_tags")
+    dietary_restrictions = TaggableManager(through=TaggedDietaryRestriction,
+                                           related_name="dietary_restrictions")
+    tools = TaggableManager(through=TaggedTool,
+                            related_name="tools")
 
     def __str__(self):
         return '%s: %s' % (self.recipe_title, self.recipe_text)

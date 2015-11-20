@@ -49,14 +49,29 @@ To run the app locally using heroku:
 
 ## Debugging
 
-You can try both of the following for debugging when `heroku local` fails to boot worker
+- You can try both of the following for debugging when `heroku local` fails to boot worker
 
         python3 manage.py runserver
         web: gunicorn cookin.wsgi
 
-To open and search the logs of the deployed app:
+- To open and search the logs of the deployed app:
 
         heroku addons:open papertrail
+
+- Every time you merge master into your own branch, make sure the migrations do not conflict.
+
+If conflict exists, you may fix it the dumb way:
+
+        git checkout master
+        python3 manage.py migrate
+        git checkout [your-branch]
+        rm [your migrations that conflict with master]
+        python3 manage.py makemigrations
+
+You may need to go into psql to delete a table etc. When you can successfully make a migration, run:
+
+        python3 manage.py migrate
+
 
 
 ### Style:
