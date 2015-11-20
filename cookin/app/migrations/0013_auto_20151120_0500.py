@@ -8,33 +8,29 @@ import app.models.ingredient_model
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0011_delete_tag'),
+        ('app', '0012_userprofile'),
     ]
 
     operations = [
         migrations.CreateModel(
             name='Ingredient',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
                 ('ingredient_name', models.CharField(max_length=32)),
                 ('ingredient_description', models.TextField(default='Coming soon!')),
-                ('ingredient_image', models.ImageField(blank=True, upload_to=app.models.ingredient_model.ingredient_image_name)),
-                ('ingredient_price_per_unit', models.IntegerField()),
-                ('ingredient_unit', models.CharField(max_length=32)),
+                ('ingredient_image', models.ImageField(upload_to=app.models.ingredient_model.ingredient_image_name, blank=True)),
+                ('ingredient_price_per_unit', models.IntegerField(null=True)),
+                ('ingredient_unit', models.CharField(max_length=32, null=True)),
             ],
         ),
         migrations.CreateModel(
             name='Ingredient_In_Recipe',
             fields=[
-                ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True, serialize=False)),
+                ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
                 ('num_units', models.IntegerField()),
                 ('ingredient', models.ForeignKey(to='app.Ingredient')),
+                ('recipe', models.ForeignKey(to='app.Recipe')),
             ],
-        ),
-        migrations.AddField(
-            model_name='ingredient_in_recipe',
-            name='recipe',
-            field=models.ForeignKey(to='app.Recipe'),
         ),
         migrations.AddField(
             model_name='recipe',
