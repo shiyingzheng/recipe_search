@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render
-from app.models import Recipe
+from app.models import Recipe, Ingredient, Ingredient_In_Recipe
 from app.forms import AddRecipeForm
 from app.views import recipe_detail
 from django.contrib.auth.decorators import login_required
@@ -15,6 +15,12 @@ def add_new_recipe(request):
             tags = form.cleaned_data.get('recipe_tags').split()
             for tag in tags:
                 post.recipe_tags.add(tag)
+            ings = form.cleaned_data.get('recipe_ingredients').split("|")
+            for ing in ings:
+                data=ing.split(":")
+                ingredient,created = Ingredient.objects.get_or_create(ingredient_name=data[0].lower())
+                relation = Ingredient_In_Recipe(recipe=post, ingredient = ingredient, num_units = data[1])
+                relation.save()
             post = form.save()
             return redirect(recipe_detail, recipe_id=post.pk)
         else:

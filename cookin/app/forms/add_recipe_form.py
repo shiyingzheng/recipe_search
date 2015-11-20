@@ -4,6 +4,7 @@ from app.models import Recipe
 
 class AddRecipeForm(ModelForm):
     recipe_tags = CharField(required = False)
+    recipe_ingredients = CharField()
 
     class Meta:
         model = Recipe
