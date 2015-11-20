@@ -1,8 +1,13 @@
 from django.contrib.auth.models import User
 from django.db import models
+import uuid
+import os
+
 
 def user_image_name(instance, filename):
-	return "user_images/%d/%s" % (instance.pk, filename)
+	extension = os.path.splitext(filename)[1]
+	return "user_images/%s%s" % (uuid.uuid4(), extension)
+
 
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
