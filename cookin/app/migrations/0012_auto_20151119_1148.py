@@ -8,7 +8,7 @@ import app.models.ingredient_model
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('app', '0009_auto_20151119_1012'),
+        ('app', '0011_delete_tag'),
     ]
 
     operations = [
@@ -30,11 +30,6 @@ class Migration(migrations.Migration):
                 ('num_units', models.IntegerField()),
                 ('ingredient', models.ForeignKey(to='app.Ingredient')),
             ],
-        ),
-        migrations.AlterField(
-            model_name='recipe',
-            name='recipe_tags',
-            field=models.ManyToManyField(to='app.Tag'),
         ),
         migrations.AddField(
             model_name='ingredient_in_recipe',
