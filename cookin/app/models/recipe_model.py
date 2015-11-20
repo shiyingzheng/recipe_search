@@ -35,11 +35,14 @@ class Recipe(models.Model):
             through='Ingredient_In_Recipe')
 
     recipe_tags = TaggableManager(through=TaggedRecipe,
-                                  related_name="recipe_tags")
+                                  related_name="recipe_tags",
+                                  blank=True)
     dietary_restrictions = TaggableManager(through=TaggedDietaryRestriction,
-                                           related_name="dietary_restrictions")
+                                           related_name="dietary_restrictions",
+                                           blank=True)
     tools = TaggableManager(through=TaggedTool,
-                            related_name="tools")
+                            related_name="tools",
+                            blank=True)
 
     def __str__(self):
         return '%s: %s' % (self.recipe_title, self.recipe_text)
