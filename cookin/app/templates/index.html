@@ -5,12 +5,11 @@
 {% endif %}
 
 <form enctype="multipart/form-data" method="get" action="">
-    {% csrf_token %}
 
     <p>Keywords</p>
-    {{ form.recipe_title }}<br>
+    {{ search_form.keywords }}<br>
 
-    <button type="submit">Search</button>
+    <button type="submit">Submit</button>
 </form>
 
 {% if user.is_authenticated %}
@@ -21,3 +20,6 @@
 <a href="/app/login/">Login</a><br />
 {% endif %}
 
+{% for recipe in qs %}
+{{ recipe.recipe_title }} <br>
+{% endfor %}
