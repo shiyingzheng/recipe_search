@@ -4,6 +4,15 @@
 <h1>Welcome to CookIn!</h1>
 {% endif %}
 
+<form enctype="multipart/form-data" method="get" action="">
+    {% csrf_token %}
+
+    <p>Keywords</p>
+    {{ form.recipe_title }}<br>
+
+    <button type="submit">Search</button>
+</form>
+
 {% if user.is_authenticated %}
 <a href="/app/recipes/new">Add new Recipe</a><br />
 <a href="/app/logout/">Logout</a><br />
