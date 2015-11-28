@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import datetime
+from django.utils import timezone
 import uuid
 import os
 
@@ -30,7 +30,7 @@ class Recipe(models.Model):
     recipe_text = models.TextField(default="Coming soon!")
     recipe_image = models.ImageField(upload_to=recipe_image_name,
                                      blank=True)
-    publish_date = models.DateTimeField(default=datetime.utcnow)
+    publish_date = models.DateTimeField(default=timezone.now)
     recipe_ingredients = models.ManyToManyField(Ingredient,
             through='Ingredient_In_Recipe')
 
