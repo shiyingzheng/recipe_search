@@ -4,11 +4,28 @@
 <h1>Welcome to CookIn!</h1>
 {% endif %}
 
+<form enctype="multipart/form-data" method="get" action="">
+
+    <p>Keywords</p>
+    {{ search_form.keywords }}<br>
+
+    <button type="submit">Submit</button>
+</form>
+
 {% if user.is_authenticated %}
 <a href="/app/recipes/new">Add new Recipe</a><br />
 <a href="/app/logout/">Logout</a><br />
+
 {% else %}
 <a href="/app/register/">Register Here</a><br />
 <a href="/app/login/">Login</a><br />
 {% endif %}
 
+<hr>
+{% for recipe in qs %}
+<p>
+<a href={{ request.get_host }}/app/recipes/{{ recipe.id }}> 
+    {{ recipe.recipe_title }} 
+</a> <br> 
+</p>
+{% endfor %}
