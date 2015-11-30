@@ -37,6 +37,10 @@ class Recipe(models.Model):
     num_servings = models.IntegerField(default=1,
                                        validators=[MinValueValidator(1)])
 
+    # total time will be a sum of the following two fields
+    prep_time_minutes = models.PositiveIntegerField(default=0)
+    cooking_time_minutes = models.PositiveIntegerField(default=0)
+
     recipe_tags = TaggableManager(through=TaggedRecipe,
                                   related_name="recipe_tags",
                                   blank=True)

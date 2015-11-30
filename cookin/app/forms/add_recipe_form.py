@@ -13,4 +13,6 @@ class AddRecipeForm(ModelForm):
         fields = ['recipe_title',
                   'recipe_text',
                   'recipe_image',
-                  'num_servings']
+                  'num_servings',
+                  'prep_time_minutes',
+                  'cooking_time_minutes']
