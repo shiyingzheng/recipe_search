@@ -63,9 +63,18 @@
             </p>
         {% endfor %}
     </div>
+    {% endif %}
 
     <br />
 
     <!-- Add comment -->
+    <h3>Add Comment</h3>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" name="submit" value="Submit" />
+    </form>
 
 {% endblock %}
