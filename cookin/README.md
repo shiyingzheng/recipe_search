@@ -146,6 +146,10 @@ If you ever need to reset the database...(hopefully not)
         heroku pg:reset postgres
         heroku run python manage.py syncdb
 
+To rollback to a previous migration, do
+
+        python3 manage.py migrate app [migration number]
+
 
 ## Notes
 

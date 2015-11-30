@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.core.validators import MinValueValidator
 import uuid
 import os
 
@@ -33,6 +34,12 @@ class Recipe(models.Model):
     publish_date = models.DateTimeField(default=timezone.now)
     recipe_ingredients = models.ManyToManyField(Ingredient,
             through='Ingredient_In_Recipe')
+    num_servings = models.IntegerField(default=1,
+                                       validators=[MinValueValidator(1)])
+
+    # total time will be a sum of the following two fields
+    prep_time_minutes = models.PositiveIntegerField(default=0)
+    cooking_time_minutes = models.PositiveIntegerField(default=0)
 
     recipe_tags = TaggableManager(through=TaggedRecipe,
                                   related_name="recipe_tags",
