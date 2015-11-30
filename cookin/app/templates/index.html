@@ -24,8 +24,8 @@
 <hr>
 {% for recipe in qs %}
 <p>
-<a href={{ request.get_host }}/app/recipes/{{ recipe.id }}> 
-    {{ recipe.recipe_title }} 
-</a> <br> 
+<a href="/app/recipes/{{ recipe.id }}/">
+    {{ recipe.recipe_title }}
+</a> <br>
 </p>
 {% endfor %}
