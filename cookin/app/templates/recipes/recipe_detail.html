@@ -45,4 +45,27 @@
     </ul>
     {% endif %}
 
+    <!-- display comments -->
+    {% if recipe.ratings.all %}
+    <h3>Comments</h3>
+    <div class="comments">
+        {% for rating in recipe.ratings.all %}
+            <span>{{ rating.rating_user.user.username }} said on {{ rating.rating_date }}:
+            </span>
+            {% if rating.rating_image %}
+                <img src="{{ MEDIA_URL }}{{rating.rating_image}}" width="50%" alt=""/>
+            {% endif %}
+            <p>
+                {{ rating.rating_comment }}
+            </p>
+            <p>
+                Rating: {{ rating.rating_stars }} of 5
+            </p>
+        {% endfor %}
+    </div>
+
+    <br />
+
+    <!-- Add comment -->
+
 {% endblock %}
