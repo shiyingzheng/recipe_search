@@ -5,6 +5,9 @@
         <img src="{{ MEDIA_URL }}{{recipe.recipe_image}}" width="50%" alt=""/>
     {% endif %}
 
+    <p>Number of servings: {{recipe.num_servings}}</p>
+
+    <h3>Directions</h3>
     <p>{{recipe.recipe_text}}</p>
 
     {% if recipe.ingredient_in_recipe_set.all %}
