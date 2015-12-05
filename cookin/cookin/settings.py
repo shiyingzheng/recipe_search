@@ -140,7 +140,7 @@ MEDIA_URL = "https://s3.amazonaws.com/%s/" % AWS_STORAGE_BUCKET_NAME
 
 
 # page to redirect users that aren't logged in when they try to access a restricted page
-LOGIN_URL = '/app/login/' 
+LOGIN_URL = '/app/login/'
 
 
 # Taggit case insensitive tags
