@@ -54,5 +54,15 @@ class Recipe(models.Model):
     def __str__(self):
         return '%s: %s' % (self.recipe_title, self.recipe_text)
 
+    def relevance(self, my_tools=[]):
+        score = 0
+        recipe_tools = self.tools.names()
+        for tool in recipe_tools:
+            if tool in my_tools:
+                score += 1
+            else:
+                score -= 1
+        return score
+
     class Meta:
         app_label = 'app'
