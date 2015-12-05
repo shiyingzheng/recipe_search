@@ -5,8 +5,8 @@ import os
 
 
 def user_image_name(instance, filename):
-	extension = os.path.splitext(filename)[1]
-	return "user_images/%s%s" % (uuid.uuid4(), extension)
+    extension = os.path.splitext(filename)[1]
+    return "user_images/%s%s" % (uuid.uuid4(), extension)
 
 
 class UserProfile(models.Model):
