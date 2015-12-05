@@ -39,6 +39,7 @@ INSTALLED_APPS = (
     'app',
     'storages',
     'taggit',
+    'bootstrap3',
 )
 
 MIDDLEWARE_CLASSES = (
