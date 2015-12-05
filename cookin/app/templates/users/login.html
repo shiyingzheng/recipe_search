@@ -1,22 +1,18 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <!-- Is anyone getting tired of repeatedly entering the header over and over?? -->
-        <title>Cookin</title>
-    </head>
+{% extends "base.html" %}
+{% load bootstrap3 %}
 
-    <body>
-        <h1>Login to Cookin</h1>
+{% block content %}
 
-        <form id="login_form" method="post" action="/app/login/">
-            {% csrf_token %}
-            Username: <input type="text" name="username" value="" size="50" />
-            <br />
-            Password: <input type="password" name="password" value="" size="50" />
-            <br />
+<h1>Login to Cookin</h1>
 
-            <input type="submit" value="submit" />
-        </form>
+<form id="login_form" method="post" action="/app/login/">
+    {% csrf_token %}
+    Username: <input type="text" name="username" value="" size="50" />
+    <br />
+    Password: <input type="password" name="password" value="" size="50" />
+    <br />
 
-    </body>
-</html>
+    {% bootstrap_button "Search" button_type='submit' %}
+</form>
+
+{% endblock %}
