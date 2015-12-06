@@ -1,26 +1,53 @@
+{# Tell django what the base template is #}
 {% extends "base.html" %}
+
+{# laod the django package's form helpers #}
 {% load bootstrap3 %}
 
+{# Title of page to be displayed on browser tab: Cookin | Home #}
+{% block title %}Home{% endblock %}
+
+{# Jumbotron block for main site title #}
+{% block jumbotron %}
+<div class="jumbotron">
+    {# bootstrap top-level container #}
+    <div class="container">
+        {% if user.is_authenticated %}
+        <h1>Welcome to CookIn, {{ user.username }}!</h1>
+        {% else %}
+        <h1>Welcome to CookIn!</h1>
+        {% endif %}
+        <p>A powerful recipe search app.</p>
+    </div>
+</div>
+{% endblock %}
+
+{# All content of this page goes in the 'content' block #}
 {% block content %}
 
-{% if user.is_authenticated %}
-<h1>Welcome to CookIn, {{ user.username }}!</h1>
-{% else %}
-<h1>Welcome to CookIn!</h1>
-{% endif %}
+{# bootstrap content goes in rows! (then columns) #}
+<div class="row">
+    <form enctype="multipart/form-data" method="get" action="" class="form-horizontal">
+        {# django-bootstrap package form helper #}
+        {% bootstrap_form search_form layout='horizontal' horizontal_label_class='col-sm-2' %}
 
-<form enctype="multipart/form-data" method="get" action="">
-    {% bootstrap_form search_form layout='inline' %}
-    {% bootstrap_button "Search" button_type='submit' %}
-</form>
+        {# search button! #}
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                {% bootstrap_button "Search" button_type='submit' %}
+            </div>
+        </div>
+    </form>
+</div>
 
 <hr>
 {% for recipe in recipes %}
-<p>
-<a href="/app/recipes/{{ recipe.id }}/">
-    {{ recipe.recipe_title }}
-</a> <br>
-</p>
+    {# bootstrap content goes in rows! (then columns) #}
+    <div class="row">
+        <p>
+            <a href="/app/recipes/{{ recipe.id }}/">{{ recipe.recipe_title }}</a>
+        </p>
+    </div>
 {% endfor %}
 
 {% endblock %}

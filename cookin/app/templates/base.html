@@ -5,7 +5,10 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         {# The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags #}
+
+        {# Tell django we're using static files (js/css) #}
         {% load staticfiles %}
+
         {# Load the bootstrap tag library #}
         {% load bootstrap3 %}
 
@@ -14,11 +17,17 @@
 
         {# Display django.contrib.messages as Bootstrap alerts #}
         {% bootstrap_messages %}
-        <title>{% block title %}CookIn{% endblock %}</title>
+
+        {# page title for browser tabs! #}
+        {# make it page-specific with title blocks! #}
+        {# Always has format 'CookIn | <title>'. By default: 'CookIn | Recipes!' #}
+        <title>CookIn | {% block title %}Recipes!{% endblock %}</title>
     </head>
 
     <body>
+        {# Bootstrap Nav Bar! #}
         <nav class="navbar navbar-inverse navbar-fixed-top">
+        {# bootstrap top-level container #}
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -40,13 +49,21 @@
                     <li><a href="/app/register/">Register Here</a></li>
                     <li><a href="/app/login/">Login</a></li>
                     {% endif %}
+
+                    {# use navmenu blocks to add page-specific links here! #}
                     {% block navmenu %}
                     {% endblock %}
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
         </nav>
+
+        {# use jumbotron blocks to add a big title to pages! (see index.html) #}
+        {% block jumbotron %}{% endblock %}
+
+        {# top level bootstrap container for the page's content! #}
         <div id="content" class="container" style="padding-top:50px;">
+            {# put all page content in content blocks #}
             {% block content %}{% endblock %}
         </div>
         {# Load jquery, then bootstrap JavaScript #}
