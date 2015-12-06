@@ -1,18 +1,44 @@
+{# Tell django what the base template is #}
 {% extends "base.html" %}
+
+{# laod the django package's form helpers #}
 {% load bootstrap3 %}
 
+{# Title of page to be displayed on browser tab: Cookin | Login #}
+{% block title %}Login{% endblock %}
+
+{# All content of this page goes in the 'content' block #}
 {% block content %}
 
-<h1>Login to Cookin</h1>
+{# bootstrap content goes in rows! (then columns) #}
+<div class="row">
+    <div class="col-sm-10">
+        <h1>Login to Cookin</h1>
+    </div>
+</div>
 
-<form id="login_form" method="post" action="/app/login/">
+<form id="login_form" method="post" action="/app/login/" class="form-horizontal">
     {% csrf_token %}
-    Username: <input type="text" name="username" value="" size="50" />
-    <br />
-    Password: <input type="password" name="password" value="" size="50" />
-    <br />
+    <div class="form-group">
+        <label for="username" class="col-sm-2 control-label">Username</label>
+        <div class="col-sm-10">
+            <input type="text" name="username" class="form-control" id="username" placeholder="Username">
+        </div>
+    </div>
 
-    {% bootstrap_button "Search" button_type='submit' %}
+    <div class="form-group">
+        <label for="password" class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+            <input type="password" name="password" class="form-control" id="password" placeholder="Password">
+        </div>
+    </div>
+
+    {# login button! #}
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            {% bootstrap_button "Login" button_type='submit' %}
+        </div>
+    </div>
 </form>
 
 {% endblock %}

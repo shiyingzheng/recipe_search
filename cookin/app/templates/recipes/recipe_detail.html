@@ -1,56 +1,81 @@
+{# Tell django what the base template is #}
 {% extends "base.html" %}
+
+{# laod the django package's form helpers #}
 {% load bootstrap3 %}
 
+{# Title of page to be displayed on browser tab: Cookin | <title of recipe> #}
+{% block title %}{{ recipe.recipe_title }}{% endblock %}
+
+{# All content of this page goes in the 'content' block #}
 {% block content %}
+
+{# bootstrap content goes in rows! (then columns) #}
+<div class="row">
     <h1>{{ recipe.recipe_title }}</h1>
+</div>
 
+<div class="row">
     {% if recipe.recipe_image %}
-        <img src="{{ MEDIA_URL }}{{recipe.recipe_image}}" width="50%" alt=""/>
+    <img src="{{ MEDIA_URL }}{{recipe.recipe_image}}" width="50%" alt=""/>
     {% endif %}
+</div>
 
+<div class="row">
     <p>Number of servings: {{recipe.num_servings}}</p>
     <p>Prep time: {{recipe.prep_time_minutes}} minutes</p>
     <p>Cooking time: {{recipe.cooking_time_minutes}} minutes</p>
+</div>
 
+<div class="row">
     <h3>Directions</h3>
     <p>{{recipe.recipe_text}}</p>
+</div>
 
-    {% if recipe.ingredient_in_recipe_set.all %}
-        <h3>Ingredients</h3>
-        <ul>
+{% if recipe.ingredient_in_recipe_set.all %}
+<div class="row">
+    <h3>Ingredients</h3>
+    <ul>
         {% for ingredient in recipe.ingredient_in_recipe_set.all %}
-            <li>
-                {{ ingredient.ingredient }} - {{ ingredient.num_units }} units
-            </li>
+        <li>
+        {{ ingredient.ingredient }} - {{ ingredient.num_units }} units
+        </li>
         {% endfor %}
-        </ul>
-    {% endif %}
+    </ul>
+</div>
+{% endif %}
 
-    {% if recipe.tools.all %}
-        <h3>Tools</h3>
-        <ul>
+{% if recipe.tools.all %}
+<div class="row">
+    <h3>Tools</h3>
+    <ul>
         {% for tool in recipe.tools.all %}
-            <li>{{ tool }}</li>
+        <li>{{ tool }}</li>
         {% endfor %}
     </ul>
-    {% endif %}
+</div>
+{% endif %}
 
-    {% if recipe.dietary_restrictions.all %}
-        <h4>Satisfied Dietary Restrictions</h4>
-        <ul>
+{% if recipe.dietary_restrictions.all %}
+<div class="row">
+    <h4>Satisfied Dietary Restrictions</h4>
+    <ul>
         {% for restriction in recipe.dietary_restrictions.all %}
-            <li>{{ restriction }}</li>
+        <li>{{ restriction }}</li>
         {% endfor %}
     </ul>
-    {% endif %}
+</div>
+{% endif %}
 
-    {% if recipe.recipe_tags.all %}
-        <h4>Tags</h4>
-        <ul>
+{% if recipe.recipe_tags.all %}
+<div class="row">
+    <h4>Tags</h4>
+    <ul>
         {% for tag in recipe.recipe_tags.all %}
-            <li>{{ tag }}</li>
+        <li>{{ tag }}</li>
         {% endfor %}
     </ul>
-    {% endif %}
+</div>
+{% endif %}
 
 {% endblock %}
