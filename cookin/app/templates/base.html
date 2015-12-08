@@ -15,6 +15,9 @@
         {# Load bootstrap CSS #}
         {% bootstrap_css %}
 
+        {# link to our stylesheet #}
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
+
         {# Display django.contrib.messages as Bootstrap alerts #}
         {% bootstrap_messages %}
 
@@ -62,7 +65,7 @@
         {% block jumbotron %}{% endblock %}
 
         {# top level bootstrap container for the page's content! #}
-        <div id="content" class="container" style="padding-top:50px;">
+        <div id="content" class="container">
             {# put all page content in content blocks #}
             {% block content %}{% endblock %}
         </div>

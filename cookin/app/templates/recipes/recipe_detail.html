@@ -13,10 +13,10 @@
 {# bootstrap content goes in rows! (then columns) #}
 <div class="row">
     {% if recipe.recipe_image %}
-    <div class="col-sm-7">
-        <img src="{{ MEDIA_URL }}{{recipe.recipe_image}}" class="img-responsive img-thumbnail center-block" alt=""/>
-    </div>
     <div class="col-sm-5">
+        <img src="{{ MEDIA_URL }}{{recipe.recipe_image}}" class="img-responsive img-thumbnail center-block recipe-detail-img" alt=""/>
+    </div>
+    <div class="col-sm-7">
     {% else %}
     <div class="col-sm-12">
     {% endif %}
