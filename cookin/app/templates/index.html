@@ -1,34 +1,97 @@
-{% if user.is_authenticated %}
-<h1>Welcome to CookIn, {{ user.username }}!</h1>
-{% else %}
-<h1>Welcome to CookIn!</h1>
-{% endif %}
+{# Tell django what the base template is #}
+{% extends "base.html" %}
 
-<form enctype="multipart/form-data" method="get" action="">
+{# laod the django package's form helpers #}
+{% load bootstrap3 %}
 
-    <p>Keywords</p>
-    {{ search_form.keywords }}<br>
+{# Title of page to be displayed on browser tab: Cookin | Home #}
+{% block title %}Home{% endblock %}
 
-    <p>Tools</p>
-    {{ search_form.tools }}<br>
+{# Jumbotron block for main site title #}
+{% block jumbotron %}
+<div class="jumbotron">
+    {# bootstrap top-level container #}
+    <div class="container">
+        {% if user.is_authenticated %}
+        <h1>Welcome to CookIn, {{ user.username }}!</h1>
+        {% else %}
+        <h1>Welcome to CookIn!</h1>
+        {% endif %}
+        <p>Share something tasty!</p>
+    </div>
+</div>
+{% endblock %}
 
-    <button type="submit">Submit</button>
-</form>
+{# All content of this page goes in the 'content' block #}
+{% block content %}
 
-{% if user.is_authenticated %}
-<a href="/app/recipes/new">Add new Recipe</a><br />
-<a href="/app/logout/">Logout</a><br />
+{# bootstrap content goes in rows! (then columns) #}
+<div class="row">
+    <form enctype="multipart/form-data" method="get" action="" class="form-horizontal">
+        {# django-bootstrap package form helper #}
+        {% bootstrap_form search_form layout='horizontal' horizontal_label_class='col-sm-2' %}
 
-{% else %}
-<a href="/app/register/">Register Here</a><br />
-<a href="/app/login/">Login</a><br />
-{% endif %}
+        {# search button! #}
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                {% bootstrap_button "Search" button_type='submit' %}
+            </div>
+        </div>
+    </form>
+</div>
 
 <hr>
-{% for recipe in recipes %}
-<p>
-<a href="/app/recipes/{{ recipe.id }}/">
-    {{ recipe.recipe_title }}
-</a> <br>
-</p>
-{% endfor %}
+<div class="row">
+    <div class="col-md-12">
+        {% for recipe in recipes %}
+        {# bootstrap content goes in rows! (then columns) #}
+        <div class="row">
+            {% if recipe.recipe_image %}
+            <div class="col-sm-3">
+                <a href="/app/recipes/{{ recipe.id }}/"><img src="{{ MEDIA_URL }}{{recipe.recipe_image}}" class="img-responsive img-thumbnail center-block recipe-thumb-img" alt=""/></a>
+            </div>
+            <div class="col-sm-9">
+            {% else %}
+            <div class="col-sm-12">
+            {% endif %}
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h3><a href="/app/recipes/{{ recipe.id }}/">{{ recipe.recipe_title }}</a></h3>
+                    </div>
+                </div>
+                {% if recipe.dietary_restrictions.all %}
+                <div class="row">
+                    <div class="col-xs-2">
+                        <p class="text-right">Diet notes:</p>
+                    </div>
+                    <div class="col-xs-10">
+                        <ul class="list-inline">
+                            {% for restriction in recipe.dietary_restrictions.all %}
+                            <li>{{ restriction }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+                {% if recipe.recipe_tags.all %}
+                <div class="row">
+                    <div class="col-xs-2">
+                        <p class="text-right">Tags:</p>
+                    </div>
+                    <div class="col-xs-10">
+                        <ul class="list-inline">
+                            {% for tag in recipe.recipe_tags.all %}
+                            <li>{{ tag }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <hr>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -10,7 +10,7 @@ def ingredient_image_name(instance, filename):
 
 
 class Ingredient(models.Model):
-    ingredient_name = models.CharField(max_length=32)
+    ingredient_name = models.CharField(db_index=True, max_length=32)
     ingredient_description = models.TextField(default="Coming soon!")
     ingredient_image = models.ImageField(upload_to=ingredient_image_name,
                                      blank=True)
