@@ -120,4 +120,44 @@
 </div>
 {% endif %}
 
+    <!-- display comments -->
+    {% if recipe.ratings.all %}
+    <h3>Comments</h3>
+    <div class="comments">
+        {% for rating in recipe.ratings.all %}
+            <span>{{ rating.rating_user.user.username }} said on {{ rating.rating_date }}:
+            </span>
+            {% if rating.rating_image %}
+                <img src="{{ MEDIA_URL }}{{rating.rating_image}}" width="50%" alt=""/>
+            {% endif %}
+            <p>
+                {{ rating.rating_comment }}
+            </p>
+            <p>
+                Rating: {{ rating.rating_stars }} of 5
+            </p>
+            <p>
+                Price: {{ rating.rating_price }} dollars
+            </p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <br />
+
+    <!-- Add comment only if user is logged in-->
+    {% if user.is_authenticated %}
+    <h3>Add Comment</h3>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <table>
+            {{ form.as_table }}
+        </table>
+        <input type="submit" name="submit" value="Submit" />
+    </form>
+    {% else %}
+    <a href="/app/register/">Register to comment</a><br />
+    <a href="/app/login/">Login to comment</a><br />
+    {% endif %}
+
 {% endblock %}

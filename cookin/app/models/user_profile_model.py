@@ -11,7 +11,7 @@ def user_image_name(instance, filename):
 
 class UserProfile(models.Model):
     # This line is required. Links UserProfile to a User model instance.
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, related_name='profile')
 
     # The additional attributes we wish to include.
     website = models.URLField(blank=True)
@@ -19,4 +19,7 @@ class UserProfile(models.Model):
 
     # Override the __unicode__() method to return out something meaningful!
     def __unicode__(self):
+        return self.user.username
+
+    def __str__(self):
         return self.user.username

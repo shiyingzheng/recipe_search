@@ -145,4 +145,3 @@ LOGIN_URL = '/app/login/'
 
 # Taggit case insensitive tags
 TAGGIT_CASE_INSENSITIVE = True
-
