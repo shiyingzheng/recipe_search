@@ -2,10 +2,15 @@
 {% load bootstrap3 %}
 
 {% block content %}
+<div class="page-header">
     <h1>Add a New Recipe!</h1>
+</div>
 
     {% if not valid %}
-        <p>Please enter valid information!</p>
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Please enter valid information!</strong>
+    </div>
     {% endif %}
 
     <form enctype="multipart/form-data" method="post" action="">

@@ -9,7 +9,9 @@
 
 {# All content of this page goes in the 'content' block #}
 {% block content %}
-
+<div class="page-header">
+    <h1>{{ recipe.recipe_title }}</h1>
+</div>
 {# bootstrap content goes in rows! (then columns) #}
 <div class="row">
     {% if recipe.recipe_image %}
@@ -20,11 +22,6 @@
     {% else %}
     <div class="col-sm-12">
     {% endif %}
-        <div class="row">
-            <div class="col-sm-12">
-                <h1>{{ recipe.recipe_title }}</h1>
-            </div>
-        </div>
         <div class="row">
             <div class="col-sm-12">
                 <p>Number of servings: {{recipe.num_servings}}</p>

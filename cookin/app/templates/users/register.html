@@ -2,13 +2,15 @@
 {% load bootstrap3 %}
 
 {% block content %}
-<h1>Register with Cookin</h1>
+<div class="page-header">
+    <h1>Register with Cookin</h1>
 
-{% if registered %}
-Cookin says: <strong>thank you for registering!</strong>
-<a href="/app/">Return to the homepage.</a><br />
+    {% if registered %}
+    <p>Cookin says: <span class="label label-success">thank you for registering!</span></p>
+    <a href="/app/">Return to the homepage.</a>
+</div>
 {% else %}
-Cookin says: <strong>register here!</strong><br />
+</div>
 
 <form id="user_form" method="post" action="/app/register/"
     enctype="multipart/form-data">

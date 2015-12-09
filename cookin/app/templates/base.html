@@ -29,7 +29,7 @@
 
     <body>
         {# Bootstrap Nav Bar! #}
-        <nav class="navbar navbar-inverse navbar-fixed-top">
+        <nav class="navbar navbar-default navbar-fixed-top">
         {# bootstrap top-level container #}
         <div class="container">
             <div class="navbar-header">
@@ -43,19 +43,34 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="/">Home</a></li>
+                    <li{# class="active" #}><a href="/">Home</a></li>
                     {% if user.is_authenticated %}
                     <li><a href="/app/recipes/new">Add new Recipe</a></li>
-                    <li><a href="/app/logout/">Logout</a></li>
+                    {% endif %}
+
+                    {# use the navmenu block in other templates #}
+                    {# to put extra links here! #}
+                    {% block navmenu %}
+                    {% endblock %}
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if user.is_authenticated %}
+                    <!--<li><a href="#">Help</a></li> -->
+                    <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <!--<li><a href="#">Profile</a></li>
+                        <li><a href="#">My Recipes</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li role="separator" class="divider"></li>-->
+                        <li><a href="/app/logout/">Logout</a></li>
+                    </ul>
+                    </li>
 
                     {% else %}
                     <li><a href="/app/register/">Register Here</a></li>
                     <li><a href="/app/login/">Login</a></li>
                     {% endif %}
-
-                    {# use navmenu blocks to add page-specific links here! #}
-                    {% block navmenu %}
-                    {% endblock %}
                 </ul>
             </div><!--/.nav-collapse -->
         </div>
