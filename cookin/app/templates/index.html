@@ -9,6 +9,9 @@
     <p>Keywords</p>
     {{ search_form.keywords }}<br>
 
+    <p>Tools</p>
+    {{ search_form.tools }}<br>
+
     <button type="submit">Submit</button>
 </form>
 
@@ -22,7 +25,7 @@
 {% endif %}
 
 <hr>
-{% for recipe in qs %}
+{% for recipe in recipes %}
 <p>
 <a href="/app/recipes/{{ recipe.id }}/">
     {{ recipe.recipe_title }}

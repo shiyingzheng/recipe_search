@@ -81,6 +81,7 @@ Set up your editor to use:
 - 4-space tabs.
 - No trailing whitespace.
 - One trailing newline at the end of the file.
+- Indent using whitespaces. Conversion: 1 tab = 4 whitespaces.
 
 Keep lines < 80 characters.
 
