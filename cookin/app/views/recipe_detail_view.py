@@ -13,5 +13,5 @@ def recipe_detail(request, recipe_id):
     	rating.rating_user = request.user.profile
     	rating.save()
     	return redirect(request.path)
-    return render(request, 'recipes/recipe_detail.html', 
+    return render(request, 'recipes/recipe_detail.html',
     						{'recipe': recipe, 'form': form})
