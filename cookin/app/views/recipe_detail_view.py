@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 def recipe_detail(request, recipe_id):
     recipe = get_object_or_404(Recipe, pk=recipe_id)
     rating_form = RatingForm(request.POST or None)
+    recipe_update_form = AddRecipeForm(instance=recipe)
     if rating_form.is_valid():
         rating = rating_form.save(commit=False)
         rating.rating_recipe = recipe
@@ -14,4 +15,4 @@ def recipe_detail(request, recipe_id):
         rating.save()
         return redirect(request.path)
     return render(request, 'recipes/recipe_detail.html',
-                  {'recipe': recipe, 'form': rating_form})
+                  {'recipe': recipe, 'rating_form': rating_form})

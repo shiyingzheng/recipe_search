@@ -1,13 +1,10 @@
-from django.views.generic.edit import UpdateView
+from django.shortcuts import get_object_or_404, render
+from django.views.generic import UpdateView
 from app.models import Recipe
+from app.forms import AddRecipeForm
 
-class RecipeUpdate(UpdateView):
+class RecipeUpdateView(UpdateView):
     model = Recipe
-    fields = ['recipe_title',
-              'recipe_text',
-              'recipe_image',
-              'num_servings',
-              'prep_time_minutes',
-              'cooking_time_minutes']
-              
-    template_name_suffix = '_update_form'
+    template_name = 'recipes/recipe_update.html'
+    form_class = AddRecipeForm
+    success_url = 'app/recipes'

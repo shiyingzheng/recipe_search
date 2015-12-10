@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Edit Recipe!</h1>
+</div>
+
+    {% if not valid %}
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Please enter valid information!</strong>
+    </div>
+    {% endif %}
+
+    <form enctype="multipart/form-data" method="post" action="">
+        {% csrf_token %}
+
+        {% bootstrap_label "Recipe Title" label_for="id_recipe_title" %}
+        {% bootstrap_field form.recipe_title show_label=False %}
+
+        {% bootstrap_label "Recipe Text" label_for="id_recipe_text" %}
+        {% bootstrap_field form.recipe_text show_label=False %}
+
+        {% bootstrap_label "Prep time (minutes)" label_for="id_prep_time_minutes" %}
+        {% bootstrap_field form.prep_time_minutes show_label=False %}
+
+        {% bootstrap_label "Cooking time (minutes)" label_for="id_cooking_time_minutes" %}
+        {% bootstrap_field form.cooking_time_minutes show_label=False %}
+
+        {% bootstrap_label "Ingredients (Format: carrot:1 | bell pepper:2)" label_for="id_recipe_ingredients" %}
+        {% bootstrap_field form.recipe_ingredients show_label=False %}
+
+        {% bootstrap_label "Number of Servings" label_for="id_num_servings" %}
+        {% bootstrap_field form.num_servings show_label=False %}
+
+        {% bootstrap_label "Tools (comma separated)" label_for="id_tools" %}
+        {% bootstrap_field form.tools show_label=False %}
+
+        {% bootstrap_label "Satisfied Dietary Restrictions (comma separated)" label_for="id_dietary_restrictions" %}
+        {% bootstrap_field form.dietary_restrictions show_label=False %}
+
+        {% bootstrap_label "Tags (comma separated)" label_for="id_recipe_tags" %}
+        {% bootstrap_field form.recipe_tags show_label=False %}
+        {% bootstrap_label "Image Upload" label_for="" %}
+        {% bootstrap_field form.recipe_image show_label=False %}
+
+        {% bootstrap_button "Submit" button_type='submit' %}
+    </form>
+{% endblock %}
