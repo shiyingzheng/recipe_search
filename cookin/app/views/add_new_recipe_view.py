@@ -13,6 +13,8 @@ def add_new_recipe(request):
         if form.is_valid():
             post = form.save()
 
+            post.recipe_owner = request.user.profile
+
             tags = form.cleaned_data.get('recipe_tags').split(',')
             for tag in tags:
                 post.recipe_tags.add(tag)
