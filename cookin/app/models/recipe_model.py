@@ -54,6 +54,9 @@ class Recipe(models.Model):
     def __str__(self):
         return '%s: %s' % (self.recipe_title, self.recipe_text)
 
+    def total_time(self):
+        return self.prep_time_minutes + self.cooking_time_minutes
+
     def relevance(self, my_tools=[]):
         score = 0
         recipe_tools = self.tools.names()
