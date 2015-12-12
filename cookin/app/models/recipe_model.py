@@ -57,7 +57,7 @@ class Recipe(models.Model):
     def relevance(self, my_tools=[]):
         my_tools = list(map(str.lower, my_tools))
         score = 0
-        recipe_tools = self.tools.names()
+        recipe_tools = self.tools.slugs()
         for tool in recipe_tools:
             if tool.lower() in my_tools:
                 score += 1
