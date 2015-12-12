@@ -1,43 +1,50 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
 {% block content %}
-    <h1>Add new recipe!</h1>
+<div class="page-header">
+    <h1>Add a New Recipe!</h1>
+</div>
 
     {% if not valid %}
-        <p>Please enter valid information!</p>
+    <div class="alert alert-warning alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Please enter valid information!</strong>
+    </div>
     {% endif %}
 
     <form enctype="multipart/form-data" method="post" action="">
         {% csrf_token %}
 
-        <p>Recipe Title</p>
-        {{ form.recipe_title }}<br>
+        {% bootstrap_label "Recipe Title" label_for="id_recipe_title" %}
+        {% bootstrap_field form.recipe_title show_label=False %}
 
-        <p>Recipe Text</p>
-        {{ form.recipe_text }}<br>
+        {% bootstrap_label "Recipe Text" label_for="id_recipe_text" %}
+        {% bootstrap_field form.recipe_text show_label=False %}
 
-        <p>Prep time (minutes)</p>
-        {{ form.prep_time_minutes }}<br>
+        {% bootstrap_label "Prep time (minutes)" label_for="id_prep_time_minutes" %}
+        {% bootstrap_field form.prep_time_minutes show_label=False %}
 
-        <p>Cooking time (minutes)</p>
-        {{ form.cooking_time_minutes }}<br>
+        {% bootstrap_label "Cooking time (minutes)" label_for="id_cooking_time_minutes" %}
+        {% bootstrap_field form.cooking_time_minutes show_label=False %}
 
-        <p>Ingredients (Format: carrot:1 | bell pepper:2)</p>
-        {{ form.recipe_ingredients }}<br>
+        {% bootstrap_label "Ingredients (Format: carrot:1 | bell pepper:2)" label_for="id_recipe_ingredients" %}
+        {% bootstrap_field form.recipe_ingredients show_label=False %}
 
-        <p>Number of Servings</p>
-        {{ form.num_servings }}<br>
+        {% bootstrap_label "Number of Servings" label_for="id_num_servings" %}
+        {% bootstrap_field form.num_servings show_label=False %}
 
-        <p>Tools (comma separated)</p>
-        {{ form.tools }}<br>
+        {% bootstrap_label "Tools (comma separated)" label_for="id_tools" %}
+        {% bootstrap_field form.tools show_label=False %}
 
-        <p>Satisfied Dietary Restrictions (comma separated)</p>
-        {{ form.dietary_restrictions }}<br>
+        {% bootstrap_label "Satisfied Dietary Restrictions (comma separated)" label_for="id_dietary_restrictions" %}
+        {% bootstrap_field form.dietary_restrictions show_label=False %}
 
-        <p>Tags (comma separated)</p>
-        {{ form.recipe_tags }}<br>
+        {% bootstrap_label "Tags (comma separated)" label_for="id_recipe_tags" %}
+        {% bootstrap_field form.recipe_tags show_label=False %}
+        {% bootstrap_label "Image Upload" label_for="" %}
+        {% bootstrap_field form.recipe_image show_label=False %}
 
-        <p>Image Upload</p>
-        {{ form.recipe_image }}<br><br>
-
-        <button type="submit">Submit</button>
+        {% bootstrap_button "Submit" button_type='submit' %}
     </form>
 {% endblock %}

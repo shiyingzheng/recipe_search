@@ -7,3 +7,5 @@ boto
 django-storages-redux
 Pillow
 django-taggit
+django-jquery
+django-bootstrap3

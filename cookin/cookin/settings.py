@@ -39,6 +39,8 @@ INSTALLED_APPS = (
     'app',
     'storages',
     'taggit',
+    'jquery',
+    'bootstrap3',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -117,11 +119,9 @@ ALLOWED_HOSTS = ['*']
 # Static asset configuration
 STATIC_URL = '/static/'
 
-"""
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-"""
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
@@ -145,4 +145,3 @@ LOGIN_URL = '/app/login/'
 
 # Taggit case insensitive tags
 TAGGIT_CASE_INSENSITIVE = True
-
