@@ -31,6 +31,9 @@
         {% bootstrap_label "Ingredients (Format: carrot:1 | bell pepper:2)" label_for="id_recipe_ingredients" %}
         {% bootstrap_field form.recipe_ingredients show_label=False %}
 
+        {% bootstrap_label "Estimated cost (dollars)" label_for="id_estimated_cost" %}
+        {% bootstrap_field form.estimated_cost show_label=False %}
+
         {% bootstrap_label "Number of Servings" label_for="id_num_servings" %}
         {% bootstrap_field form.num_servings show_label=False %}
 
