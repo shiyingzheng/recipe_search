@@ -1,29 +1,10 @@
 from django.shortcuts import render
 from app.forms import SearchForm
 from app.models import Recipe
-from app.models import Rating
 from django.utils.text import slugify
 
-def average_cost(recipe):
-    cost = recipe.estimated_cost
-    qs = Rating.objects.filter(rating_recipe__exact=recipe.id)
-    recipe_ratings = qs.all()
-    if len(recipe_ratings) == 0:
-        return cost
 
-    cost_sum = 0
-    num_estimates = 0
-    if cost:
-        cost_sum += cost
-        num_estimates += 1
-    for rating in recipe_ratings:
-        if rating.rating_price:
-            cost_sum += rating.rating_price * 1.0
-            num_estimates += 1
-    return cost_sum / num_estimates
-
-
-def filter_recipes(recipes, max_time, dietary_restrictions, max_cost, exclude_tools):
+def filtered_recipes(recipes, max_time, dietary_restrictions, max_cost, exclude_tools):
     if not max_time:
         max_time = float('inf')
     if not dietary_restrictions:
@@ -43,7 +24,7 @@ def filter_recipes(recipes, max_time, dietary_restrictions, max_cost, exclude_to
                 fits_restrictions = False
         if not fits_restrictions:
             continue
-        if average_cost(recipe) > max_cost:
+        if recipe.average_cost_estimate() > max_cost:
             continue
         fits_tool_restrictions = True
         for tool in exclude_tools:
@@ -60,7 +41,7 @@ def index(request):
     qs = Recipe.objects.all()
     keywords = request.GET.get("keywords")
     tools = request.GET.get("tools")
-    time = request.GET.get("time")
+    max_time = request.GET.get("max_time")
     dietary_restrictions = request.GET.get("dietary_restrictions")
     max_cost = request.GET.get("max_cost")
     exclude_tools = request.GET.get("exclude_tools")
@@ -85,10 +66,10 @@ def index(request):
         for keyword in keywords:
             qs = qs.filter(recipe_title__icontains=keyword)
 
-    if time:
-        time = float(time)
+    if max_time:
+        max_time = float(max_time)
     else:
-        time = 0
+        max_time = 0
 
     if max_cost:
         max_cost = float(max_cost)
@@ -96,11 +77,7 @@ def index(request):
         max_cost = 0
 
     unsorted_recipes = qs.all()
-    unsorted_recipes = filter_recipes(unsorted_recipes, time, dietary_restrictions, max_cost, exclude_tools)
+    unsorted_recipes = filtered_recipes(unsorted_recipes, max_time, dietary_restrictions, max_cost, exclude_tools)
     sorted_recipes = sorted(unsorted_recipes, key= lambda recipe: -recipe.relevance(my_tools=tools))
 
-    relevances = []
-    for recipe in sorted_recipes:
-        relevances.append(recipe.relevance(my_tools=tools))
-
-    return render(request, 'index.html', {'search_form': form, 'recipes': sorted_recipes, 'rel':relevances})
+    return render(request, 'index.html', {'search_form': form, 'recipes': sorted_recipes})

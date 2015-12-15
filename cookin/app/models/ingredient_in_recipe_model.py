@@ -11,8 +11,8 @@ class Ingredient_In_Recipe(models.Model):
     unit_name = models.CharField(max_length=32, default="units")
 
     def __str__(self):
-        return '%s: %d %s' % (self.recipe.title, self.num_units,
-                self.ingredient.name)
+        return '%s: %d %s' % (self.recipe.recipe_title, self.num_units,
+                self.ingredient.ingredient_name)
 
     class Meta:
         app_label = 'app'
