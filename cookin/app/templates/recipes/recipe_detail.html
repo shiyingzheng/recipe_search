@@ -40,6 +40,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <p>Estimated cost: {{recipe.estimated_cost}} dollars</p>
+                <p>Total time: {{recipe.total_time}} minutes</p>
             </div>
         </div>
         {% if recipe.tools.all %}
@@ -125,44 +126,73 @@
 </div>
 {% endif %}
 
-    <!-- display comments -->
-    {% if recipe.ratings.all %}
-    <h3>Comments</h3>
-    <div class="comments">
-        {% for rating in recipe.ratings.all %}
-            <span>{{ rating.rating_user.user.username }} said on {{ rating.rating_date }}:
-            </span>
-            {% if rating.rating_image %}
-                <img src="{{ MEDIA_URL }}{{rating.rating_image}}" width="50%" alt=""/>
-            {% endif %}
-            <p>
-                {{ rating.rating_comment }}
-            </p>
-            <p>
-                Rating: {{ rating.rating_stars }} of 5
-            </p>
-            <p>
-                Price: {{ rating.rating_price }} dollars
-            </p>
-        {% endfor %}
+<!-- display comments -->
+{% if recipe.ratings.all %}
+<div class="row">
+    <div class="col-sm-12">
+        <h3>Comments</h3>
     </div>
-    {% endif %}
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        {% for rating in recipe.ratings.all %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">{{ rating.rating_user.user.username }} said on {{ rating.rating_date|date:"D M jS" }}: </h4>
+            </div>
+            <div class="panel-body">
+                {% if rating.rating_image %}
+                <div class="col-sm-3">
+                    <div class="thumbnail">
+                        <img src="{{ MEDIA_URL }}{{rating.rating_image}}" width="50%" alt=""/>
+                    </div>
+                </div>
+                <div class="col-sm-9">
+                {% else %}
+                <div class="col-sm-12">
+                {% endif %}
+                    <p>
+                    {{ rating.rating_comment }}
+                    </p>
+                    <p>
+                    Rating: {{ rating.rating_stars }} of 5
+                    </p>
+                    <p>
+                    Price: {{ rating.rating_price }} dollars
+                    </p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}
 
-    <br />
 
-    <!-- Add comment only if user is logged in-->
-    {% if user.is_authenticated %}
-    <h3>Add Comment</h3>
+<!-- Add comment only if user is logged in-->
+{% if user.is_authenticated %}
+<div class="row">
+    <div class="col-sm-12">
+        <h3>Add Comment</h3>
+    </div>
+</div>
+<div class="row">
     <form action="" method="POST">
         {% csrf_token %}
-        <table>
-            {{ form.as_table }}
-        </table>
-        <input type="submit" name="submit" value="Submit" />
+        {% bootstrap_form form %}
+        {% bootstrap_button "Submit" name="submit" button_type='submit' %}
     </form>
-    {% else %}
-    <a href="/app/register/">Register to comment</a><br />
-    <a href="/app/login/">Login to comment</a><br />
-    {% endif %}
+</div>
+{% else %}
+<div class="row">
+    <div class="col-sm-12">
+        {% bootstrap_button "Register" button_type='button' href="/app/register/" button_class='btn-default' %}
+        or
+        {% bootstrap_button "Login" button_type='button' href="/app/login/" button_class='btn-default' %}
+        to comment.
+    </div>
+</div>
+{% endif %}
 
 {% endblock %}

@@ -71,6 +71,16 @@
                     </div>
                 </div>
                 {% endif %}
+                {% if recipe.prep_time_minutes and recipe.cooking_time_minutes%}
+                <div class="row">
+                    <div class="col-xs-2">
+                        <p class="text-right">Time required:</p>
+                    </div>
+                    <div class="col-xs-10">
+                        {{ recipe.total_time }} minutes
+                    </div>
+                </div>
+                {% endif %}
                 {% if recipe.dietary_restrictions.all %}
                 <div class="row">
                     <div class="col-xs-2">
