@@ -5,15 +5,22 @@ from app.models import Rating
 from django.utils.text import slugify
 
 def average_cost(recipe):
+    cost = recipe.estimated_cost
     qs = Rating.objects.filter(rating_recipe__exact=recipe.id)
     recipe_ratings = qs.all()
     if len(recipe_ratings) == 0:
-        return 0
+        return cost
 
     cost_sum = 0
+    num_estimates = 0
+    if cost:
+        cost_sum += cost
+        num_estimates += 1
     for rating in recipe_ratings:
-        cost_sum += rating.rating_price * 1.0
-    return cost_sum / len(recipe_ratings)
+        if rating.rating_price:
+            cost_sum += rating.rating_price * 1.0
+            num_estimates += 1
+    return cost_sum / num_estimates
 
 
 def filter_recipes(recipes, max_time, dietary_restrictions, max_cost, exclude_tools):
