@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.core.validators import MinValueValidator
+from django.utils.text import slugify
 import uuid
 import os
 
@@ -55,11 +56,11 @@ class Recipe(models.Model):
         return '%s: %s' % (self.recipe_title, self.recipe_text)
 
     def relevance(self, my_tools=[]):
-        my_tools = list(map(str.lower, my_tools))
+        my_tools = list(map(slugify, my_tools))
         score = 0
         recipe_tools = self.tools.slugs()
         for tool in recipe_tools:
-            if tool.lower() in my_tools:
+            if tool in my_tools:
                 score += 1
             else:
                 score -= 1

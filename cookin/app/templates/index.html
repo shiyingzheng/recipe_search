@@ -83,6 +83,19 @@
                             {% for tag in recipe.recipe_tags.all %}
                             <li>{{ tag }}</li>
                             {% endfor %}
+                            {% for t in tools%}
+                            <li>{{ t }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="col-xs-2">
+                        <p class="text-right">Tools:</p>
+                    </div>
+                    <div class="col-xs-10">
+                        <ul class="list-inline">
+                            {% for t in recipe.tools.all %}
+                            <li>{{ t }}</li>
+                            {% endfor %}
                         </ul>
                     </div>
                 </div>
