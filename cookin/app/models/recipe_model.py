@@ -41,6 +41,8 @@ class Recipe(models.Model):
     prep_time_minutes = models.PositiveIntegerField(default=0)
     cooking_time_minutes = models.PositiveIntegerField(default=0)
 
+    estimated_cost = models.PositiveIntegerField(default=0)
+
     recipe_tags = TaggableManager(through=TaggedRecipe,
                                   related_name="recipe_tags",
                                   blank=True)
@@ -53,6 +55,9 @@ class Recipe(models.Model):
 
     def __str__(self):
         return '%s: %s' % (self.recipe_title, self.recipe_text)
+
+    def total_time(self):
+        return self.prep_time_minutes + self.cooking_time_minutes
 
     def relevance(self, my_tools=[]):
         score = 0
