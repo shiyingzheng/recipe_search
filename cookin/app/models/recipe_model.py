@@ -41,6 +41,8 @@ class Recipe(models.Model):
     prep_time_minutes = models.PositiveIntegerField(default=0)
     cooking_time_minutes = models.PositiveIntegerField(default=0)
 
+    estimated_cost = models.PositiveIntegerField(default=0)
+
     recipe_tags = TaggableManager(through=TaggedRecipe,
                                   related_name="recipe_tags",
                                   blank=True)

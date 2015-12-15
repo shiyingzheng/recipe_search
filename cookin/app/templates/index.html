@@ -59,6 +59,18 @@
                         <h3><a href="/app/recipes/{{ recipe.id }}/">{{ recipe.recipe_title }}</a></h3>
                     </div>
                 </div>
+                {% if recipe.estimated_cost %}
+                <div class="row">
+                    <div class="col-xs-2">
+                        <p class="text-right">Estimated_cost:</p>
+                    </div>
+                    <div class="col-xs-10">
+                        <ul class="list-inline">
+                            {{ recipe.estimated_cost }} dollars
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
                 {% if recipe.dietary_restrictions.all %}
                 <div class="row">
                     <div class="col-xs-2">

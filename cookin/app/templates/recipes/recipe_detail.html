@@ -37,6 +37,11 @@
                 <p>Cooking time: {{recipe.cooking_time_minutes}} minutes</p>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <p>Estimated cost: {{recipe.estimated_cost}} dollars</p>
+            </div>
+        </div>
         {% if recipe.tools.all %}
         <div class="row">
             <div class="col-sm-12">
@@ -112,7 +117,7 @@
         <ul>
             {% for ingredient in recipe.ingredient_in_recipe_set.all %}
             <li>
-            {{ ingredient.ingredient }} - {{ ingredient.num_units }} units
+            {{ ingredient.ingredient }} - {{ ingredient.num_units }} {{ ingredient.unit_name }}
             </li>
             {% endfor %}
         </ul>
