@@ -123,6 +123,20 @@
                     </div>
                 </div>
                 {% endif %}
+                {% if recipe.tools.all %}
+                <div class="row">
+                    <div class="col-xs-2">
+                        <p class="text-right">Tools:</p>
+                    </div>
+                    <div class="col-xs-10">
+                        <ul class="list-inline">
+                            {% for t in recipe.tools.all %}
+                            <li>{{ t }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
         <hr>

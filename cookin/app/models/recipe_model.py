@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.core.validators import MinValueValidator
+from django.utils.text import slugify
 from django.db.models import Avg
 import uuid
 import os
@@ -60,9 +61,27 @@ class Recipe(models.Model):
     def total_time(self):
         return self.prep_time_minutes + self.cooking_time_minutes
 
+    def average_cost_estimate(self):
+        cost = self.estimated_cost
+        recipe_ratings = self.ratings.all()
+        if len(recipe_ratings) == 0:
+            return cost
+    
+        cost_sum = 0
+        num_estimates = 0
+        if cost:
+            cost_sum += cost / self.num_servings
+            num_estimates += 1
+        for rating in recipe_ratings:
+            if rating.rating_price:
+                cost_sum += rating.rating_price  * 1.0
+                num_estimates += 1
+        return cost_sum / num_estimates
+            
     def relevance(self, my_tools=[]):
+        my_tools = map(slugify, my_tools)
         score = 0
-        recipe_tools = self.tools.names()
+        recipe_tools = self.tools.slugs()
         for tool in recipe_tools:
             if tool in my_tools:
                 score += 1
