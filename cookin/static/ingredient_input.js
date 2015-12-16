@@ -7,7 +7,7 @@ $(document).on('click', "#ing-add", function() {
         + "<span class='input-group-addon' id='ing-name-"+ingID+"'>Name:</span>\n"
         + "<input type='text' class='form-control' aria-describedby='ing-name-"+ingID+"' required='required'>\n"
         + "<span class='input-group-addon' id='ing-num-"+ingID+"'>Amount:</span>\n"
-        + "<input type='number' class='form-control' aria-describedby='ing-num-"+ingID+"' required='required'>\n"
+        + "<input type='number' step='any' class='form-control' aria-describedby='ing-num-"+ingID+"' required='required'>\n"
         + "<span class='input-group-addon' id='ing-unit-"+ingID+"'>Units:</span>\n"
         + "<input type='text' class='form-control' placeholder='optional' aria-describedby='ing-unit-"+ingID+"'>\n"
         + "<span class='input-group-btn'>\n"
