@@ -29,12 +29,13 @@ def add_new_recipe(request):
             for ing in ings:
                 data = ing.split(":")
                 ingredient, created = Ingredient.objects.get_or_create(ingredient_name=data[0].lower())
-                num_and_unit = data[1].strip().split(" ")
+                num = data[1].strip()
+                unit = data[2].strip()
                 relation = Ingredient_In_Recipe(recipe=post,
                                                 ingredient=ingredient,
-                                                num_units=num_and_unit[0])
-                if len(num_and_unit) > 1:
-                    relation.unit_name = num_and_unit[1]
+                                                num_units=num)
+                if len(unit) > 1:
+                    relation.unit_name = unit
                 relation.save()
 
             post = form.save()

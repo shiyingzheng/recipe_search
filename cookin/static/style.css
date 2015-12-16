@@ -9,10 +9,15 @@ body {
 
 /* class for images on the recipe detail page */
 .recipe-detail-img {
-    max-height: 400px;
+    max-height: 430px;
 }
 
 /* class for thumbnails in the index page's search results */
 .recipe-thumb-img {
-    max-height: 200px;
+    max-height: 216px;
+}
+
+/* class to hide special input fields */
+.hidden-field {
+    display: none;
 }

@@ -2,6 +2,7 @@ from django.db import models
 from django.utils import timezone
 from django.core.validators import MinValueValidator
 from django.utils.text import slugify
+from django.db.models import Avg
 import uuid
 import os
 
@@ -87,6 +88,9 @@ class Recipe(models.Model):
             else:
                 score -= 1
         return score
+
+    def average_rating(self):
+        return self.ratings.all().aggregate(Avg('rating_stars'))
 
     class Meta:
         app_label = 'app'

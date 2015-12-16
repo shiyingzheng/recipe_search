@@ -13,7 +13,8 @@
         {% load bootstrap3 %}
 
         {# Load bootstrap CSS #}
-        {% bootstrap_css %}
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap.min.css' %}" />
+        <link rel="stylesheet" type="text/css" href="{% static 'bootstrap-theme.min.css' %}" />
 
         {# link to our stylesheet #}
         <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}" />
@@ -87,5 +88,8 @@
         {# Load jquery, then bootstrap JavaScript #}
         <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
         {% bootstrap_javascript %}
+
+        {# block to add our own static javascript files after jquery/bootstrap is loaded #}
+        {% block javascript %}{% endblock %}
     </body>
 </html>

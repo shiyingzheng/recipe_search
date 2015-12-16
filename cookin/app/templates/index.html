@@ -29,7 +29,7 @@
 <div class="row">
     <form enctype="multipart/form-data" method="get" action="" class="form-horizontal">
         {# django-bootstrap package form helper #}
-        {% bootstrap_form search_form layout='horizontal' horizontal_label_class='col-sm-2' %}
+        {% bootstrap_form search_form layout='horizontal' horizontal_label_class='col-sm-2' field_class='col-sm-10' %}
 
         {# search button! #}
         <div class="form-group">
@@ -59,25 +59,39 @@
                         <h3><a href="/app/recipes/{{ recipe.id }}/">{{ recipe.recipe_title }}</a></h3>
                     </div>
                 </div>
+                {% if recipe.average_rating.rating_stars__avg %}
+                <div class="row">
+                    <div class="col-xs-2">
+                        <p class="text-right">Average rating: </p>
+                    </div>
+                    <div class="col-xs-10">
+                        <p class="text-left">
+                            {{recipe.average_rating.rating_stars__avg}}
+                        </p>
+                    </div>
+                </div>
+                {% endif %}
                 {% if recipe.estimated_cost %}
                 <div class="row">
                     <div class="col-xs-2">
-                        <p class="text-right">Estimated_cost:</p>
+                        <p class="text-right">Estimated Cost:</p>
                     </div>
                     <div class="col-xs-10">
-                        <ul class="list-inline">
+                        <p class="text-left">
                             {{ recipe.estimated_cost }} dollars
-                        </ul>
+                        </p>
                     </div>
                 </div>
                 {% endif %}
                 {% if recipe.prep_time_minutes and recipe.cooking_time_minutes%}
                 <div class="row">
                     <div class="col-xs-2">
-                        <p class="text-right">Time required:</p>
+                        <p class="text-right">Time Required:</p>
                     </div>
                     <div class="col-xs-10">
-                        {{ recipe.total_time }} minutes
+                        <p class="text-left">
+                            {{ recipe.total_time }} minutes
+                        </p>
                     </div>
                 </div>
                 {% endif %}
