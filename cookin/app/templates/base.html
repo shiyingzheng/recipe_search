@@ -88,5 +88,8 @@
         {# Load jquery, then bootstrap JavaScript #}
         <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
         {% bootstrap_javascript %}
+
+        {# block to add our own static javascript files after jquery/bootstrap is loaded #}
+        {% block javascript %}{% endblock %}
     </body>
 </html>

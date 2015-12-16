@@ -16,3 +16,8 @@ body {
 .recipe-thumb-img {
     max-height: 216px;
 }
+
+/* class to hide special input fields */
+.hidden-field {
+    display: none;
+}
