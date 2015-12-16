@@ -30,8 +30,9 @@
 
         {# bootstrap_label "Ingredients (Format: carrot: 1 | bell pepper: 2 pounds | salt: 2 teaspoons)" label_for="id_recipe_ingredients" #}
         {# bootstrap_field form.recipe_ingredients show_label=False #}
-        <input class="hidden-field" id="id_recipe_ingredients" name="recipe_ingredients" type="text">
+        <input class="hidden-field" id="id_recipe_ingredients" name="recipe_ingredients" type="text" readonly="readonly">
 
+        <label>Ingredients</label>
         <div id="ing-container">
             <div id="ing-0" class="form-group">
                 <div class="input-group">
