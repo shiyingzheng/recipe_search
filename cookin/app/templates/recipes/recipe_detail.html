@@ -166,7 +166,7 @@
 
     <!-- Add edit recipe functionality -->
     {% if user.profile == recipe.recipe_owner %}
-    <a href="{% url 'recipe_update' pk=recipe.id %}">Update This Recipe</a>
+    <a href="{% url 'recipe_update' recipe_id=recipe.id %}">Update This Recipe</a>
     {% endif %}
 
 

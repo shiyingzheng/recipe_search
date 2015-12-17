@@ -28,20 +28,36 @@
         {% bootstrap_label "Cooking time (minutes)" label_for="id_cooking_time_minutes" %}
         {% bootstrap_field form.cooking_time_minutes show_label=False %}
 
-        {% bootstrap_label "Ingredients (Format: carrot:1 | bell pepper:2)" label_for="id_recipe_ingredients" %}
-        {% bootstrap_field form.recipe_ingredients show_label=False %}
 
+        <div class="form-group">
+            {% bootstrap_label "Ingredients (Format: carrot:1 | bell pepper:2)" label_for="id_recipe_ingredients" %}
+            <input type="text" class="form-control" id="id_recipe_ingredients" name="recipe_ingredients"
+            value="{{ingredients}}">
+        </div>
+
+        <!--{% if recipe.ingredient_in_recipe_set.all %}{% for ingredient in recipe.ingredient_in_recipe_set.all %}{{ ingredient.ingredient }}:{{ ingredient.num_units }}{% endfor %}{% endif %}
+        -->
         {% bootstrap_label "Number of Servings" label_for="id_num_servings" %}
         {% bootstrap_field form.num_servings show_label=False %}
 
-        {% bootstrap_label "Tools (comma separated)" label_for="id_tools" %}
-        {% bootstrap_field form.tools show_label=False %}
+        <div class="form-group">
+            {% bootstrap_label "Tools (comma separated)" label_for="id_tools" %}
+            <input type="text" class="form-control" id="id_tools" name="tools"
+            value="{{ recipe.tools.all | join:"," }}">
+        </div>
 
-        {% bootstrap_label "Satisfied Dietary Restrictions (comma separated)" label_for="id_dietary_restrictions" %}
-        {% bootstrap_field form.dietary_restrictions show_label=False %}
+        <div class="form-group">
+            {% bootstrap_label "Satisfied Dietary Restrictions (comma separated)" label_for="id_dietary_restrictions" %}
+            <input type="text" class="form-control" id="id_dietary_restrictions" name="dietary_restrictions"
+            value="{{ recipe.dietary_restrictions.all | join:"," }}">
+        </div>
 
-        {% bootstrap_label "Tags (comma separated)" label_for="id_recipe_tags" %}
-        {% bootstrap_field form.recipe_tags show_label=False %}
+        <div class="form-group">
+            {% bootstrap_label "Tags (comma separated)" label_for="id_recipe_tags" %}
+            <input type="text" class="form-control" id="id_recipe_tags" name="recipe_tags"
+            value="{{ recipe.recipe_tags.all | join:"," }}">
+        </div>
+
         {% bootstrap_label "Image Upload" label_for="" %}
         {% bootstrap_field form.recipe_image show_label=False %}
 
