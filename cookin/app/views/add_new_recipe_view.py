@@ -15,23 +15,29 @@ def add_new_recipe(request):
 
             post.recipe_owner = request.user.profile
 
-            tags = form.cleaned_data.get('recipe_tags').split(',')
+            tags = form.cleaned_data.get('recipe_tags').lower().split(',')
             for tag in tags:
-                post.recipe_tags.add(tag)
+                post.recipe_tags.add(tag.strip())
 
-            tools = form.cleaned_data.get('tools').split(',')
+            tools = form.cleaned_data.get('tools').lower().split(',')
             for tool in tools:
-                post.tools.add(tool)
+                post.tools.add(tool.strip())
 
-            restrs = form.cleaned_data.get('dietary_restrictions').split(',')
+            restrs = form.cleaned_data.get('dietary_restrictions').lower().split(',')
             for restr in restrs:
-                post.dietary_restrictions.add(restr)
+                post.dietary_restrictions.add(restr.strip())
 
             ings = form.cleaned_data.get('recipe_ingredients').split("|")
             for ing in ings:
-                data=ing.split(":")
-                ingredient,created = Ingredient.objects.get_or_create(ingredient_name=data[0].lower())
-                relation = Ingredient_In_Recipe(recipe=post, ingredient = ingredient, num_units = data[1])
+                data = ing.split(":")
+                ingredient, created = Ingredient.objects.get_or_create(ingredient_name=data[0].lower())
+                num = data[1].strip()
+                unit = data[2].strip()
+                relation = Ingredient_In_Recipe(recipe=post,
+                                                ingredient=ingredient,
+                                                num_units=num)
+                if len(unit) > 1:
+                    relation.unit_name = unit
                 relation.save()
 
             post = form.save()

@@ -15,4 +15,5 @@ class AddRecipeForm(ModelForm):
                   'recipe_image',
                   'num_servings',
                   'prep_time_minutes',
-                  'cooking_time_minutes']
+                  'cooking_time_minutes',
+                  'estimated_cost']

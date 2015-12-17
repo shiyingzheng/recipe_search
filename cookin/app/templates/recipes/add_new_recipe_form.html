@@ -28,8 +28,29 @@
         {% bootstrap_label "Cooking time (minutes)" label_for="id_cooking_time_minutes" %}
         {% bootstrap_field form.cooking_time_minutes show_label=False %}
 
-        {% bootstrap_label "Ingredients (Format: carrot:1 | bell pepper:2)" label_for="id_recipe_ingredients" %}
-        {% bootstrap_field form.recipe_ingredients show_label=False %}
+        {# bootstrap_label "Ingredients (Format: carrot: 1 | bell pepper: 2 pounds | salt: 2 teaspoons)" label_for="id_recipe_ingredients" #}
+        {# bootstrap_field form.recipe_ingredients show_label=False #}
+        <input class="hidden-field" id="id_recipe_ingredients" name="recipe_ingredients" type="text" readonly="readonly">
+
+        <label>Ingredients</label>
+        <div id="ing-container">
+            <div id="ing-0" class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon" id="ing-name-0">Name:</span>
+                    <input type="text" class="form-control" aria-describedby="ing-name-0" required="required">
+                    <span class="input-group-addon" id="ing-num-0">Amount:</span>
+                    <input type="number" class="form-control" aria-describedby="ing-num-0" required="required">
+                    <span class="input-group-addon" id="ing-unit-0">Units:</span>
+                    <input type="text" class="form-control" placeholder="optional" aria-describedby="ing-unit-0">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <span id="ing-add" class="btn btn-default">Add Ingredient</span>
+        </div>
+
+        {% bootstrap_label "Estimated cost (dollars)" label_for="id_estimated_cost" %}
+        {% bootstrap_field form.estimated_cost show_label=False %}
 
         {% bootstrap_label "Number of Servings" label_for="id_num_servings" %}
         {% bootstrap_field form.num_servings show_label=False %}
@@ -45,6 +66,13 @@
         {% bootstrap_label "Image Upload" label_for="" %}
         {% bootstrap_field form.recipe_image show_label=False %}
 
-        {% bootstrap_button "Submit" button_type='submit' %}
+        <button class="btn btn-primary" type="submit" id="submit_recipe">Submit</button>
     </form>
+{% endblock %}
+
+{# Tell django we're using static files #}
+{% load staticfiles %}
+{# Attach a js file! #}
+{% block javascript %}
+<script type="text/javascript" src="{% static "ingredient_input.js" %}"></script>
 {% endblock %}
