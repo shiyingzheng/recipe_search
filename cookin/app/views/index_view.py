@@ -80,7 +80,7 @@ def index(request):
     unsorted_recipes = qs.all()
     unsorted_recipes = filtered_recipes(unsorted_recipes, max_time, dietary_restrictions, max_cost, exclude_tools)
     sorted_recipes = sorted(unsorted_recipes, key= lambda recipe: -recipe.relevance(my_tools=tools))
-    paginator = Paginator(sorted_recipes, 10) # Show 10 contacts per page
+    paginator = Paginator(sorted_recipes, 10) # Show 10 recipes per page
 
     # pagination works by issuing a SELECT query with a LIMIT for number of
     # items each page, and an OFFSET to the row at the start of the page
