@@ -82,6 +82,8 @@ def index(request):
     sorted_recipes = sorted(unsorted_recipes, key= lambda recipe: -recipe.relevance(my_tools=tools))
     paginator = Paginator(sorted_recipes, 10) # Show 10 contacts per page
 
+    # pagination works by issuing a SELECT query with a LIMIT for number of
+    # items each page, and an OFFSET to the row at the start of the page
     page = request.GET.get('page')
     try:
         sorted_recipes_page = paginator.page(page)
