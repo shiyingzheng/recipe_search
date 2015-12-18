@@ -2,6 +2,7 @@ from django.shortcuts import render
 from app.forms import SearchForm
 from app.models import Recipe
 from django.utils.text import slugify
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def filtered_recipes(recipes, max_time, dietary_restrictions, max_cost, exclude_tools):
@@ -79,5 +80,16 @@ def index(request):
     unsorted_recipes = qs.all()
     unsorted_recipes = filtered_recipes(unsorted_recipes, max_time, dietary_restrictions, max_cost, exclude_tools)
     sorted_recipes = sorted(unsorted_recipes, key= lambda recipe: -recipe.relevance(my_tools=tools))
+    paginator = Paginator(sorted_recipes, 10) # Show 10 contacts per page
 
-    return render(request, 'index.html', {'search_form': form, 'recipes': sorted_recipes})
+    page = request.GET.get('page')
+    try:
+        sorted_recipes_page = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        sorted_recipes_page = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        sorted_recipes_page = paginator.page(paginator.num_pages)
+
+    return render(request, 'index.html', {'search_form': form, 'recipes': sorted_recipes_page})
