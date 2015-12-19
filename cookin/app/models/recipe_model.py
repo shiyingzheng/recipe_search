@@ -93,7 +93,7 @@ class Recipe(models.Model):
         def f(sort_param):
             fields = {
                 "time":-self.total_time(),
-                "cost":-self.average_cost_estimate(),
+                "cost":-self.average_cost_estimate()/self.num_servings,
                 "rating":self.average_rating()
             }
             if sort_param in fields:
