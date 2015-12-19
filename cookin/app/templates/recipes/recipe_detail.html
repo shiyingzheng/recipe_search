@@ -120,7 +120,7 @@
 </div>
 <div class="row">
     <div class="col-sm-12">
-        <p>{{recipe.recipe_text}}</p>
+        <p>{{recipe.recipe_text | linebreaksbr}}</p>
     </div>
 </div>
 
@@ -176,6 +176,9 @@
                     </p>
                     <p>
                     Price: {{ rating.rating_price }} dollars
+                    </p>
+                    <p>
+                    Made {{ rating.rating_num_servings }} servings
                     </p>
                 </div>
             </div>

@@ -4,50 +4,39 @@
 {# laod the django package's form helpers #}
 {% load bootstrap3 %}
 
-{# Title of page to be displayed on browser tab: Cookin | Home #}
-{% block title %}Home{% endblock %}
-
-{% load url_replace %}
-
-{# Jumbotron block for main site title #}
 {% block jumbotron %}
 <div class="jumbotron">
     {# bootstrap top-level container #}
     <div class="container">
-        {% if user.is_authenticated %}
-        <h1>Welcome to CookIn, {{ user.username }}!</h1>
-        {% else %}
-        <h1>Welcome to CookIn!</h1>
-        {% endif %}
-        <p>Share something tasty!</p>
-        {% if user.is_authenticated %}
-        <a class="btn btn-primary" href="/app/recipes/new">Add a Recipe!</a>
-        {% endif %}
+        <div class="row">
+            {% if user.profile.picture %}
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="{{ MEDIA_URL }}{{ user.profile.picture }}">
+                </div>
+            </div>
+            <div class="col-md-8">
+            {% else %}
+            <div class="col-md-12">
+            {% endif %}
+                <h1>{{ user.username }}</h1>
+                <p>{{ user.first_name }} {{ user.last_name }}</p>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
 
-{# All content of this page goes in the 'content' block #}
+
 {% block content %}
 
-{# bootstrap content goes in rows! (then columns) #}
-<div class="row">
-    <form enctype="multipart/form-data" method="get" action="" class="form-horizontal">
-        {# django-bootstrap package form helper #}
-        {% bootstrap_form search_form layout='horizontal' bound_css_class='' horizontal_label_class='col-sm-2' field_class='col-sm-10' %}
+{% load url_replace %}
 
-        {# search button! #}
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                {% bootstrap_button "Search" button_type='submit' %}
-            </div>
-        </div>
-    </form>
-</div>
+<h1>My Recipes</h1>
 
-<hr>
 <div class="row">
     <div class="col-md-12">
+        {% if recipes %}
         {% for recipe in recipes %}
         {# bootstrap content goes in rows! (then columns) #}
         <div class="row">
@@ -76,19 +65,19 @@
                     </div>
                 </div>
                 {% endif %}
-                {% if recipe.average_cost_estimate %}
+                {% if recipe.estimated_cost %}
                 <div class="row">
                     <div class="col-xs-2">
                         <p class="text-right">Estimated Cost:</p>
                     </div>
                     <div class="col-xs-10">
                         <p class="text-left">
-                        {{ recipe.average_cost_estimate }} dollars for {{ recipe.num_servings }} servings
+                        {{ recipe.estimated_cost }} dollars for {{ recipe.num_servings }} servings
                         </p>
                     </div>
                 </div>
                 {% endif %}
-                {% if recipe.total_time %}
+                {% if recipe.prep_time_minutes and recipe.cooking_time_minutes%}
                 <div class="row">
                     <div class="col-xs-2">
                         <p class="text-right">Time Required:</p>
@@ -146,6 +135,10 @@
         </div>
         <hr>
         {% endfor %}
+        {% else %}
+        <h3>You haven't uploaded any recipes yet! :(</h3>
+        <a class="btn btn-primary" href="/app/recipes/new">Add a Recipe!</a>
+        {% endif %}
     </div>
 </div>
 

@@ -64,7 +64,7 @@ class Recipe(models.Model):
     def total_time(self):
         return self.prep_time_minutes + self.cooking_time_minutes
 
-    def average_cost_estimate(self):
+    def average_cost_estimate_per_serving(self):
         cost = self.estimated_cost
         recipe_ratings = self.ratings.all()
         if len(recipe_ratings) == 0:

@@ -24,6 +24,7 @@ class Rating(models.Model):
     rating_stars = models.IntegerField(choices=Stars_Choices)
     rating_date = models.DateTimeField(default=timezone.now)
     rating_price = models.PositiveIntegerField()
+    rating_num_servings = models.PositiveIntegerField(default=1)
     rating_comment = models.TextField(default="Add a comment!", blank=True)
     rating_image = models.ImageField(upload_to=rating_image_name,
                                     blank=True)
