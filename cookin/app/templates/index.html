@@ -18,6 +18,9 @@
         <h1>Welcome to CookIn!</h1>
         {% endif %}
         <p>Share something tasty!</p>
+        {% if user.is_authenticated %}
+        <a class="btn btn-primary" href="/app/recipes/new">Add a Recipe!</a>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
