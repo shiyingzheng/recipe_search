@@ -76,7 +76,7 @@ class Recipe(models.Model):
                 cost_sum += rating.rating_price / rating.rating_num_servings
                 num_estimates += 1
         if not num_estimates:
-            return 0
+            return float('inf')
         return cost_sum / num_estimates
 
     def average_cost_estimate(self):
