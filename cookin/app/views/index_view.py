@@ -46,6 +46,7 @@ def index(request):
     dietary_restrictions = request.GET.get("dietary_restrictions")
     max_cost = request.GET.get("max_cost")
     exclude_tools = request.GET.get("exclude_tools")
+    sort_by = request.GET.get("sort_by")
 
     if tools:
         tools = tools.split(",")
@@ -79,7 +80,7 @@ def index(request):
 
     unsorted_recipes = qs.all()
     unsorted_recipes = filtered_recipes(unsorted_recipes, max_time, dietary_restrictions, max_cost, exclude_tools)
-    sorted_recipes = sorted(unsorted_recipes, key= lambda recipe: -recipe.relevance(my_tools=tools))
+    sorted_recipes = sorted(unsorted_recipes, key= lambda recipe: -recipe.relevance(my_tools=tools, sort_by=sort_by))
     paginator = Paginator(sorted_recipes, 10) # Show 10 recipes per page
 
     # pagination works by issuing a SELECT query with a LIMIT for number of
