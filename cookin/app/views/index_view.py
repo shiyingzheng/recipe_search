@@ -65,7 +65,7 @@ def index(request):
     if keywords:
         keywords = keywords.split()
         for keyword in keywords:
-            qs = qs.filter(recipe_title__icontains=keyword).distinct() | qs.filter(recipe_tags__name__in=keywords).distinct()
+            qs = qs.filter(recipe_title__icontains=keyword).distinct() | qs.filter(recipe_tags__name__in=keywords).distinct() | qs.filter(recipe_ingredients__ingredient_name__icontains=keyword).distinct()
     else:
         keywords = []
 
