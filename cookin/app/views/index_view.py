@@ -25,7 +25,7 @@ def filtered_recipes(recipes, max_time, dietary_restrictions, max_cost, exclude_
                 fits_restrictions = False
         if not fits_restrictions:
             continue
-        if recipe.average_cost_estimate() > max_cost:
+        if recipe.average_cost_estimate()/recipe.num_servings > max_cost:
             continue
         fits_tool_restrictions = True
         for tool in exclude_tools:
@@ -66,7 +66,7 @@ def index(request):
     if keywords:
         keywords = keywords.split()
         for keyword in keywords:
-            qs = qs.filter(recipe_title__icontains=keyword)
+            qs = qs.filter(recipe_title__icontains=keyword).distinct() | qs.filter(recipe_tags__name__in=keywords).distinct()
 
     if max_time:
         max_time = float(max_time)
