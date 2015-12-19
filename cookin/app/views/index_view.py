@@ -25,7 +25,7 @@ def filtered_recipes(recipes, max_time, dietary_restrictions, max_cost, exclude_
                 fits_restrictions = False
         if not fits_restrictions:
             continue
-        if recipe.average_cost_estimate() > max_cost:
+        if recipe.average_cost_estimate()/recipe.num_servings > max_cost:
             continue
         fits_tool_restrictions = True
         for tool in exclude_tools:

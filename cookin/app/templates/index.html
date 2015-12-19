@@ -40,7 +40,7 @@
         <div class="form-group">
         <select name='sort_by'>
             <option value="rating">Rating</option>
-            <option value="cost">Cost</option>
+            <option value="cost">Cost per serving</option>
             <option value="">Tools I have</option>
             <option value="time">Time</option>
         </select>
@@ -89,7 +89,7 @@
                     </div>
                     <div class="col-xs-10">
                         <p class="text-left">
-                            {{ recipe.estimated_cost }} dollars
+                        {{ recipe.estimated_cost }} dollars for {{ recipe.num_servings }} servings
                         </p>
                     </div>
                 </div>
