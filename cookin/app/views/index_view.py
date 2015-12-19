@@ -38,13 +38,12 @@ def filtered_recipes(recipes, max_time, dietary_restrictions, max_cost, exclude_
 
 
 def index(request):
-    form = SearchForm()
     qs = Recipe.objects.all()
     keywords = request.GET.get("keywords")
     tools = request.GET.get("tools")
     max_time = request.GET.get("max_time")
     dietary_restrictions = request.GET.get("dietary_restrictions")
-    max_cost = request.GET.get("max_cost")
+    max_cost_per_serving = request.GET.get("max_cost_per_serving")
     exclude_tools = request.GET.get("exclude_tools")
     sort_by = request.GET.get("sort_by")
 
@@ -67,19 +66,26 @@ def index(request):
         keywords = keywords.split()
         for keyword in keywords:
             qs = qs.filter(recipe_title__icontains=keyword).distinct() | qs.filter(recipe_tags__name__in=keywords).distinct()
+    else:
+        keywords = []
 
     if max_time:
         max_time = float(max_time)
     else:
         max_time = 0
 
-    if max_cost:
-        max_cost = float(max_cost)
+    if max_cost_per_serving:
+        max_cost_per_serving = float(max_cost_per_serving)
     else:
-        max_cost = 0
+        max_cost_per_serving = 0
+
+    if not sort_by:
+        sort_by = 'rating'
+
+    form = SearchForm({'keywords': " ".join(keywords), 'tools':','.join(tools), 'max_time':max_time or '', 'dietary_restrictions': ",".join(dietary_restrictions), 'max_cost_per_serving': max_cost_per_serving or '', 'sort_by':sort_by})
 
     unsorted_recipes = qs.all()
-    unsorted_recipes = filtered_recipes(unsorted_recipes, max_time, dietary_restrictions, max_cost, exclude_tools)
+    unsorted_recipes = filtered_recipes(unsorted_recipes, max_time, dietary_restrictions, max_cost_per_serving, exclude_tools)
     sorted_recipes = sorted(unsorted_recipes, key= lambda recipe: -recipe.relevance(my_tools=tools, sort_by=sort_by))
     paginator = Paginator(sorted_recipes, 10) # Show 10 recipes per page
 

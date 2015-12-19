@@ -8,4 +8,4 @@ django-storages-redux
 Pillow
 django-taggit
 django-jquery
-django-bootstrap3
+git+https://github.com/ColePeppis/django-bootstrap3.git@develop
