@@ -54,6 +54,9 @@ class Recipe(models.Model):
     tools = TaggableManager(through=TaggedTool,
                             related_name="tools",
                             blank=True)
+                            
+    recipe_owner = models.ForeignKey('UserProfile', blank=True, null=True,
+                                        related_name='owner_recipe')
 
     def __str__(self):
         return '%s: %s' % (self.recipe_title, self.recipe_text)
