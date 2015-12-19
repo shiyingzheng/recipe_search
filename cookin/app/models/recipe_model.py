@@ -30,7 +30,7 @@ def recipe_image_name(instance, filename):
 
 class Recipe(models.Model):
     recipe_title = models.CharField(db_index=True, max_length=200)
-    recipe_text = models.TextField(default="Coming soon!")
+    recipe_text = models.TextField(default="Share your recipe instructions here!")
     recipe_image = models.ImageField(upload_to=recipe_image_name,
                                      blank=True)
     publish_date = models.DateTimeField(default=timezone.now)
