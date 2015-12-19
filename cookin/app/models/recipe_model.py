@@ -76,14 +76,14 @@ class Recipe(models.Model):
                 cost_sum += rating.rating_price / rating.rating_num_servings
                 num_estimates += 1
         if not num_estimates:
-            return 0 
+            return 0
         return cost_sum / num_estimates
 
     def average_cost_estimate(self):
         def truncate_2_places(x):
             return int(x * 100)/100
 
-        return truncate_2_places(self.average_cost_estimate_per_serving()) * self.num_servings
+        return truncate_2_places(self.average_cost_estimate_per_serving() * self.num_servings)
 
     def relevance(self, my_tools=[], sort_by = ""):
         def sort_relevance(sort_param):
