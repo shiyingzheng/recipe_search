@@ -6,5 +6,6 @@ from .index_view import index
 from .register_view import register
 from .login_view import user_login
 from .logout_view import user_logout
+from .recipe_update_view import recipe_update
 
 # Please import any newly added views here
