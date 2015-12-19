@@ -27,3 +27,13 @@ div#content {
 .hidden-field {
     display: none;
 }
+
+/* center the pagination nav bar thing */
+#pages-nav {
+    position: relative;
+    left: 50%;
+}
+#pages-nav>li {
+    position:relative;
+    right:50%
+}

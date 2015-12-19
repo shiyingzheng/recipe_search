@@ -155,20 +155,25 @@
     </div>
 </div>
 
-<div class="pagination">
-    <span class="step-links">
+<nav>
+    <ul id="pages-nav" class="pagination">
         {% if recipes.has_previous %}
-            <a href="?{%url_replace request 'page' recipes.previous_page_number%}">previous</a>
+        <li><a href="?{%url_replace request 'page' recipes.previous_page_number%}"><span aria-hidden="true">&larr;</span> Previous</a></li>
+        {% else %}
+        <li class="disabled"><a href="#"><span aria-hidden="true">&larr;</span> Previous</a></li>
         {% endif %}
-
-        <span class="current">
-            Page {{ recipes.number }} of {{ recipes.paginator.num_pages }}.
-        </span>
+        <li class="active">
+        <a href="#">Page {{ recipes.number }} of {{ recipes.paginator.num_pages }}
+            <span class="sr-only">(current)</span>
+        </a>
+        </li>
 
         {% if recipes.has_next %}
-            <a href="?{%url_replace request 'page' recipes.next_page_number%}">next</a>
+        <li><a href="?{%url_replace request 'page' recipes.next_page_number%}">Next <span aria-hidden="true">&rarr;</span></a></li>
+        {% else %}
+        <li class="disabled"><a href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
         {% endif %}
-    </span>
-</div>
+    </ul>
+</nav>
 
 {% endblock %}
