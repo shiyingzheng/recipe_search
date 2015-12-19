@@ -4,6 +4,30 @@
 {# laod the django package's form helpers #}
 {% load bootstrap3 %}
 
+{% block jumbotron %}
+<div class="jumbotron">
+    {# bootstrap top-level container #}
+    <div class="container">
+        <div class="row">
+            {% if user.profile.picture %}
+            <div class="col-md-4">
+                <div class="thumbnail">
+                    <img src="{{ MEDIA_URL }}{{ user.profile.picture }}">
+                </div>
+            </div>
+            <div class="col-md-8">
+            {% else %}
+            <div class="col-md-12">
+            {% endif %}
+                <h1>{{ user.username }}</h1>
+                <p>{{ user.first_name }} {{ user.last_name }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
 {% block content %}
 
 {% load url_replace %}
@@ -12,6 +36,7 @@
 
 <div class="row">
     <div class="col-md-12">
+        {% if recipes %}
         {% for recipe in recipes %}
         {# bootstrap content goes in rows! (then columns) #}
         <div class="row">
@@ -110,6 +135,10 @@
         </div>
         <hr>
         {% endfor %}
+        {% else %}
+        <h3>You haven't uploaded any recipes yet! :(</h3>
+        <a class="btn btn-primary" href="/app/recipes/new">Add a Recipe!</a>
+        {% endif %}
     </div>
 </div>
 

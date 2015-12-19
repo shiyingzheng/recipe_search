@@ -25,4 +25,4 @@ def my_recipes(request):
         sorted_recipes_page = paginator.page(paginator.num_pages)
 
     return render(request, 'users/my-recipes.html',
-                  {'recipes': sorted_recipes_page })
+            {'recipes': sorted_recipes_page, 'user':request.user })
