@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(primary_key=True, auto_created=True, serialize=False, verbose_name='ID')),
                 ('ingredient_name', models.CharField(max_length=32)),
                 ('ingredient_description', models.TextField(default='Coming soon!')),
-                ('ingredient_image', models.ImageField(upload_to=app.models.ingredient_model.ingredient_image_name, blank=True)),
+                ('ingredient_image', models.ImageField(blank=True)),
                 ('ingredient_price_per_unit', models.IntegerField(null=True)),
                 ('ingredient_unit', models.CharField(max_length=32, null=True)),
             ],
