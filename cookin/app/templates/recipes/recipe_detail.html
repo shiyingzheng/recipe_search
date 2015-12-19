@@ -10,9 +10,14 @@
 {# All content of this page goes in the 'content' block #}
 {% block content %}
 <div class="page-header">
-    <h1>{{ recipe.recipe_title }}</h1>
+    <h1>{{ recipe.recipe_title }}
+    {% if user.profile == recipe.recipe_owner %}
+    <a href="{% url 'recipe_update' recipe_id=recipe.id %}" class="btn btn-default">Update This Recipe</a>
+    {% endif %}
+    </h1>
 
     <p>Written by {{ recipe.recipe_owner }}</p>
+    <!-- Add edit recipe functionality -->
 </div>
 {# bootstrap content goes in rows! (then columns) #}
 <div class="row">
@@ -209,10 +214,6 @@
 
 
 
-    <!-- Add edit recipe functionality -->
-    {% if user.profile == recipe.recipe_owner %}
-    <a href="{% url 'recipe_update' recipe_id=recipe.id %}">Update This Recipe</a>
-    {% endif %}
 
 
 {% endblock %}

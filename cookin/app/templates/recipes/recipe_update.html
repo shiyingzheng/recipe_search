@@ -28,11 +28,13 @@
         {% bootstrap_label "Cooking time (minutes)" label_for="id_cooking_time_minutes" %}
         {% bootstrap_field form.cooking_time_minutes show_label=False %}
 
+        <input class="hidden-field" id="id_recipe_ingredients" name="recipe_ingredients" type="text" readonly="readonly" value="{{ingredients}}">
 
+        <label>Ingredients</label>
+        <div id="ing-container">
+        </div>
         <div class="form-group">
-            {% bootstrap_label "Ingredients (Format: carrot:1 | bell pepper:2)" label_for="id_recipe_ingredients" %}
-            <input type="text" class="form-control" id="id_recipe_ingredients" name="recipe_ingredients"
-            value="{{ingredients}}">
+            <span id="ing-add" class="btn btn-default">Add Ingredient</span>
         </div>
 
         {% bootstrap_label "Estimated cost (dollars)" label_for="id_estimated_cost" %}
@@ -44,24 +46,31 @@
         <div class="form-group">
             {% bootstrap_label "Tools (comma separated)" label_for="id_tools" %}
             <input type="text" class="form-control" id="id_tools" name="tools"
-            value="{{ recipe.tools.all | join:"," }}">
+            value="{{ recipe.tools.all | join:", " }}">
         </div>
 
         <div class="form-group">
             {% bootstrap_label "Satisfied Dietary Restrictions (comma separated)" label_for="id_dietary_restrictions" %}
             <input type="text" class="form-control" id="id_dietary_restrictions" name="dietary_restrictions"
-            value="{{ recipe.dietary_restrictions.all | join:"," }}">
+            value="{{ recipe.dietary_restrictions.all | join:", " }}">
         </div>
 
         <div class="form-group">
             {% bootstrap_label "Tags (comma separated)" label_for="id_recipe_tags" %}
             <input type="text" class="form-control" id="id_recipe_tags" name="recipe_tags"
-            value="{{ recipe.recipe_tags.all | join:"," }}">
+            value="{{ recipe.recipe_tags.all | join:", " }}">
         </div>
 
         {% bootstrap_label "Image Upload" label_for="" %}
         {% bootstrap_field form.recipe_image show_label=False %}
 
-        {% bootstrap_button "Submit" button_type='submit' %}
+        <button class="btn btn-primary" type="submit" id="submit_recipe">Submit</button>
     </form>
+{% endblock %}
+
+{# Tell django we're using static files #}
+{% load staticfiles %}
+{# Attach a js file! #}
+{% block javascript %}
+<script type="text/javascript" src="{% static "ingredient_input.js" %}"></script>
 {% endblock %}

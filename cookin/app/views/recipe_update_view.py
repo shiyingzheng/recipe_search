@@ -15,19 +15,19 @@ def recipe_update(request, recipe_id):
             post = form.save()
 
             post.recipe_tags.clear()
-            tags = form.cleaned_data.get('recipe_tags').split(',')
+            tags = form.cleaned_data.get('recipe_tags').lower().split(',')
             for tag in tags:
-                post.recipe_tags.add(tag)
+                post.recipe_tags.add(tag.strip())
 
-            tools = form.cleaned_data.get('tools').split(',')
             post.tools.clear()
+            tools = form.cleaned_data.get('tools').lower().split(',')
             for tool in tools:
-                post.tools.add(tool)
+                post.tools.add(tool.strip())
 
             post.dietary_restrictions.clear()
-            restrs = form.cleaned_data.get('dietary_restrictions').split(',')
+            restrs = form.cleaned_data.get('dietary_restrictions').lower().split(',')
             for restr in restrs:
-                post.dietary_restrictions.add(restr)
+                post.dietary_restrictions.add(restr.strip())
 
             post.recipe_ingredients.clear()
             ings = form.cleaned_data.get('recipe_ingredients').split("|")
