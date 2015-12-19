@@ -38,12 +38,6 @@
 
         {# search button! #}
         <div class="form-group">
-        <select name='sort_by'>
-            <option value="rating">Rating</option>
-            <option value="cost">Cost</option>
-            <option value="">Tools I have</option>
-            <option value="time">Time</option>
-        </select>
             <div class="col-sm-offset-2 col-sm-10">
                 {% bootstrap_button "Search" button_type='submit' %}
             </div>
@@ -89,7 +83,7 @@
                     </div>
                     <div class="col-xs-10">
                         <p class="text-left">
-                            {{ recipe.estimated_cost }} dollars
+                        {{ recipe.estimated_cost }} dollars for {{ recipe.num_servings }} servings
                         </p>
                     </div>
                 </div>
