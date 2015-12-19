@@ -82,18 +82,7 @@ class Recipe(models.Model):
         return cost_sum / num_estimates
             
     def relevance(self, my_tools=[], sort_by = ""):
-        if not sort_by:
-            my_tools = map(slugify, my_tools)
-            score = 0
-            recipe_tools = self.tools.slugs()
-            for tool in recipe_tools:
-                if tool in my_tools:
-                    score += 1
-                else:
-                    score -= 1
-            return score
-
-        def f(sort_param):
+        def sort_relevance(sort_param):
             fields = {
                 "time":-self.total_time(),
                 "cost":-self.average_cost_estimate()/self.num_servings,
@@ -102,7 +91,20 @@ class Recipe(models.Model):
             if sort_param in fields:
                 return fields[sort_param]
             return 0
-        return f(sort_by)
+
+        score = 0
+        if my_tools:
+            my_tools = map(slugify, my_tools)
+            recipe_tools = self.tools.slugs()
+            for tool in recipe_tools:
+                if tool in my_tools:
+                    score += 1
+                else:
+                    score -= 1
+
+        score += sort_relevance(sort_by) * .01
+        return score
+
 
 
     def average_rating(self):
