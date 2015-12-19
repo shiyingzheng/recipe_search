@@ -35,6 +35,9 @@
             value="{{ingredients}}">
         </div>
 
+        {% bootstrap_label "Estimated cost (dollars)" label_for="id_estimated_cost" %}
+        {% bootstrap_field form.estimated_cost show_label=False %}
+
         {% bootstrap_label "Number of Servings" label_for="id_num_servings" %}
         {% bootstrap_field form.num_servings show_label=False %}
 
