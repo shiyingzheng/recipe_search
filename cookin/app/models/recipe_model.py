@@ -54,7 +54,7 @@ class Recipe(models.Model):
     tools = TaggableManager(through=TaggedTool,
                             related_name="tools",
                             blank=True)
-                            
+
     recipe_owner = models.ForeignKey('UserProfile', blank=True, null=True,
                                         related_name='owner_recipe')
 
@@ -67,9 +67,6 @@ class Recipe(models.Model):
     def average_cost_estimate_per_serving(self):
         cost = self.estimated_cost
         recipe_ratings = self.ratings.all()
-        if len(recipe_ratings) == 0:
-            return cost
-    
         cost_sum = 0
         num_estimates = 0
         if cost:
@@ -77,7 +74,7 @@ class Recipe(models.Model):
             num_estimates += 1
         for rating in recipe_ratings:
             if rating.rating_price:
-                cost_sum += rating.rating_price / rating.rating_num_servings 
+                cost_sum += rating.rating_price / rating.rating_num_servings
                 num_estimates += 1
         return cost_sum / num_estimates
 
@@ -85,7 +82,7 @@ class Recipe(models.Model):
         def truncate_2_places(x):
             return int(x * 100)/100
 
-        return truncate_2_places(self.average_cost_estimate_per_serving()) * self.num_servings 
+        return truncate_2_places(self.average_cost_estimate_per_serving()) * self.num_servings
 
     def relevance(self, my_tools=[], sort_by = ""):
         def sort_relevance(sort_param):
