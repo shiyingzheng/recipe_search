@@ -54,6 +54,9 @@ class Recipe(models.Model):
     tools = TaggableManager(through=TaggedTool,
                             related_name="tools",
                             blank=True)
+                            
+    recipe_owner = models.ForeignKey('UserProfile', blank=True, null=True,
+                                        related_name='owner_recipe')
 
     def __str__(self):
         return '%s: %s' % (self.recipe_title, self.recipe_text)
@@ -90,7 +93,7 @@ class Recipe(models.Model):
             return 0
 
         score = 0
-        if tools:
+        if my_tools:
             my_tools = map(slugify, my_tools)
             recipe_tools = self.tools.slugs()
             for tool in recipe_tools:
