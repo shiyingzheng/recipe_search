@@ -5,11 +5,14 @@
 {% load bootstrap3 %}
 
 {% block content %}
+
+{% load url_replace %}
+
 <h1>My Recipes</h1>
 
 <div class="row">
     <div class="col-md-12">
-        {% for recipe in profile.owner_recipe.all %}
+        {% for recipe in recipes %}
         {# bootstrap content goes in rows! (then columns) #}
         <div class="row">
             {% if recipe.recipe_image %}
@@ -109,5 +112,26 @@
         {% endfor %}
     </div>
 </div>
+
+<nav>
+    <ul id="pages-nav" class="pagination">
+        {% if recipes.has_previous %}
+        <li><a href="?{%url_replace request 'page' recipes.previous_page_number%}"><span aria-hidden="true">&larr;</span> Previous</a></li>
+        {% else %}
+        <li class="disabled"><a href="#"><span aria-hidden="true">&larr;</span> Previous</a></li>
+        {% endif %}
+        <li class="active">
+        <a href="#">Page {{ recipes.number }} of {{ recipes.paginator.num_pages }}
+            <span class="sr-only">(current)</span>
+        </a>
+        </li>
+
+        {% if recipes.has_next %}
+        <li><a href="?{%url_replace request 'page' recipes.next_page_number%}">Next <span aria-hidden="true">&rarr;</span></a></li>
+        {% else %}
+        <li class="disabled"><a href="#">Next <span aria-hidden="true">&rarr;</span></a></li>
+        {% endif %}
+    </ul>
+</nav>
 
 {% endblock %}
