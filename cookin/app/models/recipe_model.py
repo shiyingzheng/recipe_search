@@ -64,7 +64,7 @@ class Recipe(models.Model):
     def total_time(self):
         return self.prep_time_minutes + self.cooking_time_minutes
 
-    def average_cost_estimate(self):
+    def average_cost_estimate_per_serving(self):
         cost = self.estimated_cost
         recipe_ratings = self.ratings.all()
         if len(recipe_ratings) == 0:
@@ -77,10 +77,12 @@ class Recipe(models.Model):
             num_estimates += 1
         for rating in recipe_ratings:
             if rating.rating_price:
-                cost_sum += rating.rating_price  * 1.0
+                cost_sum += rating.rating_price / rating.rating_num_servings
                 num_estimates += 1
         return cost_sum / num_estimates
-            
+    def average_cost_estimate(self):
+        return self.average_cost_estimate_per_serving() * self.num_servings 
+
     def relevance(self, my_tools=[], sort_by = ""):
         def sort_relevance(sort_param):
             fields = {

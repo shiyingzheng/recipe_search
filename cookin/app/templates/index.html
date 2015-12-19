@@ -76,14 +76,14 @@
                     </div>
                 </div>
                 {% endif %}
-                {% if recipe.estimated_cost %}
+                {% if recipe.average_cost_estimate %}
                 <div class="row">
                     <div class="col-xs-2">
                         <p class="text-right">Estimated Cost:</p>
                     </div>
                     <div class="col-xs-10">
                         <p class="text-left">
-                        {{ recipe.estimated_cost }} dollars for {{ recipe.num_servings }} servings
+                        {{ recipe.average_cost_estimate }} dollars for {{ recipe.num_servings }} servings
                         </p>
                     </div>
                 </div>
