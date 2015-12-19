@@ -7,6 +7,12 @@ body {
     padding-bottom:20px;
 }
 
+/* give a little extra room on edges of base container */
+div#content {
+    padding-left:30px;
+    padding-right:30px;
+}
+
 /* class for images on the recipe detail page */
 .recipe-detail-img {
     max-height: 430px;
