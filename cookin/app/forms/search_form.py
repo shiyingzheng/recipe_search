@@ -7,4 +7,4 @@ class SearchForm(Form):
     max_time = CharField(required=False)
     dietary_restrictions = CharField(required=False)
     max_cost = CharField(required=False)
-    sort_by = ChoiceField(choices=(('rating','Rating'),('cost','Cost'),('time','Time')), required=False)
+    sort_by = ChoiceField(choices=(('rating','Rating'),('cost','Cost per Serving'),('time','Time')), required=False)
