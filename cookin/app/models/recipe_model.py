@@ -87,6 +87,8 @@ class Recipe(models.Model):
 
     def relevance(self, my_tools=[], sort_by = ""):
         def sort_relevance(sort_param):
+            if sort_param == 'cost' and self.average_cost_estimate == 0:
+                return 1000000
             fields = {
                 "time":-self.total_time(),
                 "cost":-self.average_cost_estimate()/self.num_servings,
